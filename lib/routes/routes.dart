@@ -14,7 +14,7 @@ class RouteCont {
 
     switch (settings.name) {
       case '/home':
-        return MaterialPageRoute(builder: (context) => const HomeView());
+        return MaterialPageRoute(builder: (context) => HomeView());
     }
   }
 }
