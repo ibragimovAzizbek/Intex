@@ -5,6 +5,7 @@ import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
 import 'package:intex/extensions/mq_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/widgets/classic_text.dart';
 import '../../core/widgets/drawer.dart';
@@ -12,10 +13,23 @@ import '../../core/widgets/listtile_cutomer_about.dart';
 import '../../core/widgets/product_and_ordering.dart';
 import '../../core/widgets/text_form_filed.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
+      context.read<HomeCubit>().checkCallSupport(result);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +82,18 @@ class HomeView extends StatelessWidget {
                                     icon: Image.asset(
                                       'assets/icons/phone.png',
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context
+                                          .read<HomeCubit>()
+                                          .callButtonOnTap();
+                                    },
                                   ),
                                   IconButton(
                                     icon: Image.asset(
                                         'assets/icons/telegram.png'),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.read<HomeCubit>().telegramOnTap();
+                                    },
                                   ),
                                   IconButton(
                                     icon: Image.asset(
@@ -329,24 +349,38 @@ class HomeView extends StatelessWidget {
                                     children: [
                                       IconButton(
                                         icon: Image.asset(
-                                          'assets/icons/phone.png',
+                                          'assets/icons/phone2.png',
                                           fit: BoxFit.cover,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          context
+                                              .read<HomeCubit>()
+                                              .callButtonOnTap();
+                                        },
                                       ),
                                       IconButton(
                                         icon: Image.asset(
-                                          'assets/icons/telegram.png',
+                                          'assets/icons/telegram2.png',
                                           fit: BoxFit.cover,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          context
+                                              .read<HomeCubit>()
+                                              .telegramOnTap();
+                                        },
                                       ),
                                       IconButton(
                                         icon: Image.asset(
-                                          'assets/icons/instagram.png',
+                                          'assets/icons/instagram2.png',
                                           fit: BoxFit.cover,
+                                          height: context.h * 0.3,
+                                          width: context.w * 0.3,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          context
+                                              .read<HomeCubit>()
+                                              .instagramOnTap();
+                                        },
                                       ),
                                     ],
                                   )

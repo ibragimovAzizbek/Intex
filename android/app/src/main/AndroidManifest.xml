@@ -1,5 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ibragimovazizbek.intex">
+
+    <!-- Provide required visibility configuration for API level 30 and above -->
+    <queries>
+      <!-- If your app checks for telegram support -->
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="tg" />
+      </intent>
+      <!-- If your app checks for call support -->
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="tel" />
+      </intent>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="insta" />
+      </intent>
+    </queries>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="intex"
         android:name="${applicationName}"
