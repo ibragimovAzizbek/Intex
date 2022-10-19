@@ -12,7 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   bool hasCallSupport = false;
   Future<void>? launched;
-  String phone = '';
+  String phone = '+998994294143';
   String path = 'https://t.me/ibragimov_azizbekk';
 
   checkCallSupport(bool result) {

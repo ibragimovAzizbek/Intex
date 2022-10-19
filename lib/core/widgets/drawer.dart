@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/core/widgets/classic_text.dart';
+import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/extensions/mq_extension.dart';
 
 import '../constants/font_const.dart';
@@ -22,34 +24,53 @@ class HomeDrawer extends StatelessWidget {
               size: FontConst.extraLargeFont,
             ),
             SizedBox(height: context.h * 0.11),
-            drawerCategory(context, "Каркасные бассейны", "/framePools"), // !
+            drawerCategory(
+              context,
+              "Каркасные бассейны",
+              "/framePools", // ! PAGE"NI HAL QIL, YANGI PAGE YOKI UNIVERSIAL
+            ),
             SizedBox(height: context.h * 0.03),
             drawerCategory(
               context,
               "Надувные бассейны",
-              "/inflatablePools",
+              "/inflatablePools", // ! PAGE"NI HAL QIL, YANGI PAGE YOKI UNIVERSIAL
             ),
             SizedBox(height: context.h * 0.27),
+
+            // ? PHONE CALL
             socialNetworkContainer(
               context,
               'assets/icons/phoneDrawer.png',
-              "Позвонить", // ! URL LOUNCHER ISHLATIB BOSHQA APPGA O'TADIGAN QILISH KERAK
+              "Позвонить",
+              () {
+                context.read<HomeCubit>().callButtonOnTap();
+              },
             ),
             SizedBox(height: context.h * 0.03),
+
+            // ? TELEGRAM LINK
             socialNetworkContainer(
               context,
               'assets/icons/telegramDrawer.png',
-              "Телеграм", // ! URL LOUNCHER ISHLATIB BOSHQA APPGA O'TADIGAN QILISH KERAK
+              "Телеграм",
               color: ColorConst.white,
               colorText: ColorConst.primaryColor,
+              () {
+                context.read<HomeCubit>().telegramOnTap();
+              },
             ),
             SizedBox(height: context.h * 0.03),
+
+            // ? INSTAGRAM LINK
             socialNetworkContainer(
               context,
               'assets/icons/instagramDrawer.png',
               "Инстаграм", // ! URL LOUNCHER ISHLATIB BOSHQA APPGA O'TADIGAN QILISH KERAK
               color: ColorConst.white,
               colorText: ColorConst.primaryColor,
+              () {
+                context.read<HomeCubit>().instagramOnTap();
+              },
             ),
           ],
         ),
@@ -60,7 +81,8 @@ class HomeDrawer extends StatelessWidget {
   InkWell socialNetworkContainer(
     BuildContext context,
     String iconPath,
-    String titleName, {
+    String titleName,
+    Function function, {
     Color color = ColorConst.recommendColor,
     Color colorText = ColorConst.white,
   }) {
@@ -87,8 +109,7 @@ class HomeDrawer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        // ? social network
-        // ! URL LOUNCHER ISHLATIB BOSHQA APPGA O'TADIGAN QILISH KERAK
+        function();
       },
     );
   }
