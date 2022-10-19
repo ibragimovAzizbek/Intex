@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intex/core/widgets/classic_text.dart';
+import 'package:intex/core/widgets/text_form_filed.dart';
+import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/extensions/mq_extension.dart';
 
 import '../constants/color_const.dart';
@@ -79,7 +83,125 @@ Stack productAndOrdering(
                     ),
                   ),
                   onTap: () {
-                    // ? ZAKAZ UCHUN
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        icon: IconButton(
+                          icon: Image.asset('assets/icons/cancel.png'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        iconPadding: EdgeInsets.only(left: context.w * 0.7),
+                        backgroundColor: ColorConst.backgroundColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Container(
+                                width: context.w * 0.8,
+                                height: context.h * 0.2,
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(35),
+                                    topRight: Radius.circular(35),
+                                    bottomRight: Radius.circular(35),
+                                  ),
+                                  color: ColorConst.white,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    classicText(text,
+                                        color: ColorConst.primaryColor),
+                                    Image.asset(
+                                        'assets/images/bassen.png'), // ! MASULAT RASIMI BECK-END'dan keladi
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: context.h * 0.02),
+                              Center(
+                                child: classicText(
+                                    '1.390.000 сум'), // ! MASULAT NARXI BECK-END'dan keladi
+                              ),
+                              SizedBox(height: context.h * 0.01),
+                              Form(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: context.h * 0.048,
+                                      width: context.w * 0.8,
+                                      child: textFormFIled(
+                                        "Ваше имя",
+                                        context
+                                            .watch<HomeCubit>()
+                                            .nameController,
+                                      ),
+                                    ),
+                                    SizedBox(height: context.h * 0.01),
+                                    SizedBox(
+                                      height: context.h * 0.048,
+                                      width: context.w * 0.8,
+                                      child: textFormFIled(
+                                        "Ваш номер",
+                                        context
+                                            .watch<HomeCubit>()
+                                            .phoneNumberController,
+                                        keyboardType: TextInputType.number,
+                                      ),
+                                    ),
+                                    SizedBox(height: context.h * 0.01),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          height: context.h * 0.048,
+                                          width: context.w * 0.5,
+                                          child: textFormFIled(
+                                            "Ваш адрес",
+                                            context
+                                                .watch<HomeCubit>()
+                                                .nameController,
+                                            keyboardType:
+                                                TextInputType.streetAddress,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          iconSize: context.w * 0.15,
+                                          icon: SizedBox(
+                                            height: context.h * 0.048,
+                                            width: context.w * 0.4,
+                                            child: Image.asset(
+                                              'assets/icons/location.png',
+                                              fit: BoxFit.cover,
+                                              width: context.w * 0.2,
+                                            ),
+                                          ),
+                                          onPressed: () {},
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorConst.primaryAmber,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: classicText("Заказать"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -94,13 +216,13 @@ Stack productAndOrdering(
           alignment: Alignment.center,
           height: context.h * 0.03,
           width: context.w * 0.3,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(17),
             ),
             color: ColorConst.recommendColor,
           ),
-          child: Text(
+          child: const Text(
             'Рекомендуем',
             style: TextStyle(color: ColorConst.white),
             textAlign: TextAlign.center,

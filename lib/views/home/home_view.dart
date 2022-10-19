@@ -62,10 +62,12 @@ class _HomeViewState extends State<HomeView> {
                       color: ColorConst.primaryColor,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              SizedBox(width: context.w * 0.02),
                               Text(
                                 "INTEX-MARKET.UZ",
                                 style: TextStyle(
@@ -73,40 +75,35 @@ class _HomeViewState extends State<HomeView> {
                                   fontSize: FontConst.largeFont,
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    icon: Image.asset(
-                                      'assets/icons/phone.png',
-                                    ),
-                                    onPressed: () {
-                                      context
-                                          .read<HomeCubit>()
-                                          .callButtonOnTap();
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Image.asset(
-                                        'assets/icons/telegram.png'),
-                                    onPressed: () {
-                                      context.read<HomeCubit>().telegramOnTap();
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Image.asset(
-                                        'assets/icons/languageru.png'),
-                                    onPressed: () {},
-                                  ),
-                                  IconButton(
-                                    icon: Image.asset('assets/icons/menu.png'),
-                                    onPressed: () {
-                                      _key.currentState!.openDrawer();
-                                    },
-                                  ),
-                                ],
+                              SizedBox(width: context.w * 0.015),
+                              IconButton(
+                                iconSize: context.w * 0.1,
+                                icon: Image.asset(
+                                  'assets/icons/phone.png',
+                                ),
+                                onPressed: () {
+                                  context.read<HomeCubit>().callButtonOnTap();
+                                },
+                              ),
+                              IconButton(
+                                iconSize: context.w * 0.1,
+                                icon: Image.asset('assets/icons/telegram.png'),
+                                onPressed: () {
+                                  context.read<HomeCubit>().telegramOnTap();
+                                },
+                              ),
+                              IconButton(
+                                iconSize: context.w * 0.1,
+                                icon:
+                                    Image.asset('assets/icons/languageru.png'),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                iconSize: context.w * 0.1,
+                                icon: Image.asset('assets/icons/menu.png'),
+                                onPressed: () {
+                                  _key.currentState!.openDrawer();
+                                },
                               ),
                             ],
                           ),
@@ -348,6 +345,7 @@ class _HomeViewState extends State<HomeView> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
+                                        iconSize: context.w * 0.12,
                                         icon: Image.asset(
                                           'assets/icons/phone2.png',
                                           fit: BoxFit.cover,
@@ -359,6 +357,7 @@ class _HomeViewState extends State<HomeView> {
                                         },
                                       ),
                                       IconButton(
+                                        iconSize: context.w * 0.12,
                                         icon: Image.asset(
                                           'assets/icons/telegram2.png',
                                           fit: BoxFit.cover,
@@ -370,6 +369,7 @@ class _HomeViewState extends State<HomeView> {
                                         },
                                       ),
                                       IconButton(
+                                        iconSize: context.w * 0.12,
                                         icon: Image.asset(
                                           'assets/icons/instagram2.png',
                                           fit: BoxFit.cover,

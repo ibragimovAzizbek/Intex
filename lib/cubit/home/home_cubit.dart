@@ -9,6 +9,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
 
   bool hasCallSupport = false;
   Future<void>? launched;
