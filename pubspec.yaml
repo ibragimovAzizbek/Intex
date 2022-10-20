@@ -41,7 +41,11 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_svg: ^1.1.5
   url_launcher: ^6.1.6
-
+  lottie: ^1.4.3
+  dio: ^4.0.6
+  geolocator: ^9.0.2
+  flutter_geocoder: ^0.2.2-nullsafety
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +72,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/anim/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

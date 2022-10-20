@@ -61,7 +61,7 @@ import 'package:flutter/material.dart';
 
 class BaseView<T> extends StatefulWidget {
   final T? viewModel;
-  final Widget Function(BuildContext context, T value)? onPageBuilder;
+  final Widget Function(BuildContext context, T value) onPageBuilder;
   final Function(T model)? onModelReady;
   final VoidCallback? onDispose;
 
@@ -115,7 +115,7 @@ class _BaseViewState extends State<BaseView> with WidgetsBindingObserver {
         ),
       );
     } else {
-      return widget.onPageBuilder!(context, widget.viewModel);
+      return widget.onPageBuilder(context, widget.viewModel);
     }
   }
 

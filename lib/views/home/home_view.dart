@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/core/constants/font_const.dart';
+import 'package:intex/core/func/show_diolog_check.dart';
+import 'package:intex/core/func/show_diolog_order_product.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
 import 'package:intex/extensions/mq_extension.dart';
@@ -202,7 +204,10 @@ class _HomeViewState extends State<HomeView> {
                                 fontSize: 15,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              alertDiologOrderAProduct(
+                                  context, "Металлический каркас");
+                            },
                           )
                         ],
                       ),
@@ -291,6 +296,7 @@ class _HomeViewState extends State<HomeView> {
                                     context
                                         .watch<HomeCubit>()
                                         .phoneNumberController,
+                                    keyboardType: TextInputType.phone,
                                   ),
                                 ),
                               ],
@@ -311,7 +317,9 @@ class _HomeViewState extends State<HomeView> {
                                 fontSize: FontConst.meduimFont,
                               ),
                             ),
-                            onPressed: () {}, // ? ONPRESSED
+                            onPressed: () async {
+                              checkAlertDiolog(context);
+                            },
                           ),
                           SizedBox(height: context.h * 0.02),
                           Row(

@@ -1,5 +1,10 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_geocoder/geocoder.dart';
+import 'package:intex/data/services/location/get_location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'home_state.dart';
@@ -8,8 +13,12 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController phoneNumberController =
+      TextEditingController(text: "+998 ");
   TextEditingController locationController = TextEditingController();
+
+  var location;
+  var address;
 
   bool hasCallSupport = false;
   Future<void>? launched;
@@ -57,5 +66,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   instagramOnTap() {
     launched = makeInstagramOpen(path);
+  }
+
+  getLocation() async {
+    location = await GetLocation.determinePosition();
+    address = await Geocoder.local.findAddressesFromCoordinates(
+        Coordinates(location.latitude, location.longitude));
+
+    locationController.clear();
+    locationController.text = address[0].addressLine;
+    emit(HomeInitial());
   }
 }
