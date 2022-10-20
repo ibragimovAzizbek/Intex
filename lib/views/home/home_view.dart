@@ -78,32 +78,31 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                               SizedBox(width: context.w * 0.015),
-                              IconButton(
-                                iconSize: context.w * 0.1,
-                                icon: Image.asset(
-                                  'assets/icons/phone.png',
-                                ),
-                                onPressed: () {
+                              topIconButton(
+                                context,
+                                'assets/icons/phone.png',
+                                () {
                                   context.read<HomeCubit>().callButtonOnTap();
                                 },
                               ),
-                              IconButton(
-                                iconSize: context.w * 0.1,
-                                icon: Image.asset('assets/icons/telegram.png'),
-                                onPressed: () {
+                              topIconButton(
+                                context,
+                                'assets/icons/telegram.png',
+                                () {
                                   context.read<HomeCubit>().telegramOnTap();
                                 },
                               ),
-                              IconButton(
-                                iconSize: context.w * 0.1,
-                                icon:
-                                    Image.asset('assets/icons/languageru.png'),
-                                onPressed: () {},
+                              topIconButton(
+                                context,
+                                'assets/icons/languageru.png',
+                                () {
+                                  // ! LANGUAGE CHANGE FUNCTION
+                                },
                               ),
-                              IconButton(
-                                iconSize: context.w * 0.1,
-                                icon: Image.asset('assets/icons/menu.png'),
-                                onPressed: () {
+                              topIconButton(
+                                context,
+                                'assets/icons/menu.png',
+                                () {
                                   _key.currentState!.openDrawer();
                                 },
                               ),
@@ -117,12 +116,10 @@ class _HomeViewState extends State<HomeView> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          Text(
+                          classicText(
                             "Сезонная распродажа!",
-                            style: TextStyle(
-                              fontSize: FontConst.extraLargeFont,
-                              color: ColorConst.white,
-                            ),
+                            color: ColorConst.white,
+                            size: FontConst.extraLargeFont,
                           ),
                         ],
                       ),
@@ -173,13 +170,10 @@ class _HomeViewState extends State<HomeView> {
                       child: Column(
                         children: [
                           SizedBox(height: context.h * 0.01),
-                          const Text(
+                          classicText(
                             "Бесплатная доставка",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: ColorConst.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            color: ColorConst.white,
+                            size: 25,
                           ),
                           SizedBox(height: context.h * 0.02),
                           const Text(
@@ -206,9 +200,11 @@ class _HomeViewState extends State<HomeView> {
                             ),
                             onPressed: () {
                               alertDiologOrderAProduct(
-                                  context, "Металлический каркас");
+                                context,
+                                "Металлический каркас",
+                              );
                             },
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -267,14 +263,9 @@ class _HomeViewState extends State<HomeView> {
                       child: Column(
                         children: [
                           SizedBox(height: context.h * 0.02),
-                          Text(
-                            "Получить бесплатную\n       консультацию",
-                            style: TextStyle(
-                              fontSize: FontConst.largeFont,
-                              color: ColorConst.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          classicText(
+                              "Получить бесплатную\n       консультацию",
+                              color: ColorConst.white),
                           Form(
                             child: Column(
                               children: [
@@ -310,12 +301,9 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               backgroundColor: ColorConst.primaryAmber,
                             ),
-                            child: Text(
+                            child: classicText(
                               "Хочу проконсультироваться",
-                              style: TextStyle(
-                                color: ColorConst.black,
-                                fontSize: FontConst.meduimFont,
-                              ),
+                              size: FontConst.meduimFont,
                             ),
                             onPressed: () async {
                               checkAlertDiolog(context);
@@ -352,46 +340,36 @@ class _HomeViewState extends State<HomeView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      IconButton(
-                                        iconSize: context.w * 0.12,
-                                        icon: Image.asset(
-                                          'assets/icons/phone2.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onPressed: () {
+                                      // ? Go to the Phone with Url
+                                      iconButton(
+                                        context,
+                                        'assets/icons/phone2.png',
+                                        () {
                                           context
                                               .read<HomeCubit>()
                                               .callButtonOnTap();
                                         },
                                       ),
-                                      IconButton(
-                                        iconSize: context.w * 0.12,
-                                        icon: Image.asset(
-                                          'assets/icons/telegram2.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onPressed: () {
+                                      // ? Go to the Telegram with URL
+                                      iconButton(
+                                        context,
+                                        'assets/icons/telegram2.png',
+                                        () {
                                           context
                                               .read<HomeCubit>()
                                               .telegramOnTap();
                                         },
                                       ),
-                                      IconButton(
-                                        iconSize: context.w * 0.12,
-                                        icon: Image.asset(
-                                          'assets/icons/instagram2.png',
-                                          fit: BoxFit.cover,
-                                          height: context.h * 0.3,
-                                          width: context.w * 0.3,
-                                        ),
-                                        onPressed: () {
-                                          context
-                                              .read<HomeCubit>()
-                                              .instagramOnTap();
-                                        },
-                                      ),
+
+                                      // ? Go to the Instagram with URL
+                                      iconButton(context,
+                                          'assets/icons/instagram2.png', () {
+                                        context
+                                            .read<HomeCubit>()
+                                            .instagramOnTap();
+                                      }),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                               Column(
@@ -421,7 +399,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -439,6 +417,39 @@ class _HomeViewState extends State<HomeView> {
           }
         },
       ),
+    );
+  }
+
+  IconButton topIconButton(
+    BuildContext context,
+    String path,
+    Function function,
+  ) {
+    return IconButton(
+      iconSize: context.w * 0.1,
+      icon: Image.asset(
+        path,
+      ),
+      onPressed: () {
+        function();
+      },
+    );
+  }
+
+  IconButton iconButton(
+    BuildContext context,
+    String path,
+    Function function,
+  ) {
+    return IconButton(
+      iconSize: context.w * 0.12,
+      icon: Image.asset(
+        path,
+        fit: BoxFit.cover,
+      ),
+      onPressed: () {
+        function();
+      },
     );
   }
 
