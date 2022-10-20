@@ -13,6 +13,8 @@ class ColorConst {
   static Color blockColor = const Color(0xFFE2EFEF);
   static Color backgroundColor = const Color(0xFFF8F8F8);
 
+  static Color saleLineColor = const Color(0xFFFF0000);
+
   static Color customersColor = const Color(0xFFE2EFEF);
 
   static Color salePriceColor = const Color(0xFF848484);

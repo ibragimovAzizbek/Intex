@@ -78,6 +78,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                               SizedBox(width: context.w * 0.015),
+                              // ? Button to switch to Call
                               topIconButton(
                                 context,
                                 'assets/icons/phone.png',
@@ -85,6 +86,7 @@ class _HomeViewState extends State<HomeView> {
                                   context.read<HomeCubit>().callButtonOnTap();
                                 },
                               ),
+                              // ?  Button to switch to telegram
                               topIconButton(
                                 context,
                                 'assets/icons/telegram.png',
@@ -92,6 +94,7 @@ class _HomeViewState extends State<HomeView> {
                                   context.read<HomeCubit>().telegramOnTap();
                                 },
                               ),
+                              // ? Button to change the language
                               topIconButton(
                                 context,
                                 'assets/icons/languageru.png',
@@ -99,6 +102,7 @@ class _HomeViewState extends State<HomeView> {
                                   // ! LANGUAGE CHANGE FUNCTION
                                 },
                               ),
+                              // ? Button to Open Drawer
                               topIconButton(
                                 context,
                                 'assets/icons/menu.png',

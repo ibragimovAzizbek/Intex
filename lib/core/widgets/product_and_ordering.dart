@@ -52,6 +52,9 @@ Stack productAndOrdering(
                       "$originalPrice сум",
                       style: TextStyle(
                         color: ColorConst.salePriceColor,
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: ColorConst.saleLineColor,
+                        decorationThickness: 3,
                       ),
                     ),
                     Text(
