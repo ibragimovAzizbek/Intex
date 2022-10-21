@@ -17,7 +17,7 @@ import '../../core/widgets/product_and_ordering.dart';
 import '../../core/widgets/text_form_filed.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -98,9 +98,20 @@ class _HomeViewState extends State<HomeView> {
                               // ? Button to change the language
                               topIconButton(
                                 context,
-                                'assets/icons/languageru.png',
+                                context.locale.toString() == "uz_UZ"
+                                    ? 'assets/icons/languageru.png'
+                                    : 'assets/icons/languageuz.png',
                                 () {
-                                  // ! LANGUAGE CHANGE FUNCTION
+                                  switch (context.locale.toString()) {
+                                    case "uz_UZ":
+                                      context
+                                          .setLocale(const Locale("ru", "RU"));
+                                      break;
+                                    case "ru_RU":
+                                      context
+                                          .setLocale(const Locale("uz", "UZ"));
+                                      break;
+                                  }
                                 },
                               ),
                               // ? Button to Open Drawer
@@ -121,6 +132,7 @@ class _HomeViewState extends State<HomeView> {
                               fit: BoxFit.cover,
                             ),
                           ),
+                          // ? Seasonal sale -> text
                           classicText(
                             "seasonal_sale".tr(),
                             color: ColorConst.white,
@@ -176,14 +188,14 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           SizedBox(height: context.h * 0.01),
                           classicText(
-                            "Бесплатная доставка",
+                            "free_sh".tr(),
                             color: ColorConst.white,
                             size: 25,
                           ),
                           SizedBox(height: context.h * 0.02),
-                          const Text(
-                            "Бесплатная доставка осуществляется в пределах города Ташкент (за пределами города доставка оплачивается отдельно)",
-                            style: TextStyle(
+                          Text(
+                            "free_t".tr(),
+                            style: const TextStyle(
                               color: ColorConst.white,
                             ),
                             textAlign: TextAlign.center,
@@ -197,7 +209,7 @@ class _HomeViewState extends State<HomeView> {
                               backgroundColor: ColorConst.primaryAmber,
                             ),
                             child: Text(
-                              "Оформить заказ",
+                              "checkout".tr(),
                               style: TextStyle(
                                 color: ColorConst.black,
                                 fontSize: 15,
@@ -216,30 +228,30 @@ class _HomeViewState extends State<HomeView> {
                     SizedBox(height: context.h * 0.03),
                     categoryContainer(
                       context,
-                      "Ценности наших клиентов",
+                      "values_of_our_clients".tr(),
                       color: ColorConst.customersColor,
                       textColor: ColorConst.primaryColor,
                     ),
                     SizedBox(height: context.h * 0.02),
                     aboutCutomerWorldView(
                       'assets/icons/exprience.png',
-                      "Опыт",
-                      "Профессионализм наших сотрудников",
+                      "an_experience".tr(),
+                      "the_employees".tr(),
                     ),
                     aboutCutomerWorldView(
                       'assets/icons/car.png',
-                      "Доставка",
-                      "Бесплатная доставка по городу",
+                      "delivery".tr(),
+                      "free_city".tr(),
                     ),
                     aboutCutomerWorldView(
                       'assets/icons/check.png',
-                      "Качество",
-                      "Прочные, качественные бассейны",
+                      "quality".tr(),
+                      "sturdy_pools".tr(),
                     ),
                     SizedBox(height: context.h * 0.03),
                     categoryContainer(
                       context,
-                      "Бассейны от intex в Ташкенте",
+                      "pools_t".tr(),
                       color: ColorConst.customersColor,
                       textColor: ColorConst.primaryColor,
                     ),
@@ -268,8 +280,7 @@ class _HomeViewState extends State<HomeView> {
                       child: Column(
                         children: [
                           SizedBox(height: context.h * 0.02),
-                          classicText(
-                              "Получить бесплатную\n       консультацию",
+                          classicText("git_consultation".tr(),
                               color: ColorConst.white),
                           Form(
                             child: Column(
@@ -279,7 +290,7 @@ class _HomeViewState extends State<HomeView> {
                                   width: context.w * 0.9,
                                   height: context.h * 0.048,
                                   child: textFormFIled(
-                                    "Имя",
+                                    "name".tr(),
                                     context.watch<HomeCubit>().nameController,
                                   ),
                                 ),
@@ -288,7 +299,7 @@ class _HomeViewState extends State<HomeView> {
                                   width: context.w * 0.9,
                                   height: context.h * 0.048,
                                   child: textFormFIled(
-                                    "Телефон",
+                                    "phone".tr(),
                                     context
                                         .watch<HomeCubit>()
                                         .phoneNumberController,
@@ -307,7 +318,7 @@ class _HomeViewState extends State<HomeView> {
                               backgroundColor: ColorConst.primaryAmber,
                             ),
                             child: classicText(
-                              "Хочу проконсультироваться",
+                              "i_consult".tr(),
                               size: FontConst.meduimFont,
                             ),
                             onPressed: () async {
@@ -328,7 +339,7 @@ class _HomeViewState extends State<HomeView> {
                                           'assets/icons/subwayTime.png'),
                                       SizedBox(width: context.w * 0.02),
                                       classicText(
-                                        "Рабочее время",
+                                        "working_time".tr(),
                                         color: ColorConst.white,
                                         size: FontConst.meduimFont,
                                       ),
@@ -367,12 +378,15 @@ class _HomeViewState extends State<HomeView> {
                                       ),
 
                                       // ? Go to the Instagram with URL
-                                      iconButton(context,
-                                          'assets/icons/instagram2.png', () {
-                                        context
-                                            .read<HomeCubit>()
-                                            .instagramOnTap();
-                                      }),
+                                      iconButton(
+                                        context,
+                                        'assets/icons/instagram2.png',
+                                        () {
+                                          context
+                                              .read<HomeCubit>()
+                                              .instagramOnTap();
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ],

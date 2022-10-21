@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/func/show_diolog_check.dart';
@@ -51,7 +52,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                   SizedBox(height: context.h * 0.02),
                   Center(
                     child: classicText(
-                      '1.390.000 сум',
+                      '1.390.000 ${"currency_name".tr()}',
                     ), // ! MASULAT NARXI BECK-END'dan keladi
                   ),
                   SizedBox(height: context.h * 0.01),
@@ -62,7 +63,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                           height: context.h * 0.048,
                           width: context.w * 0.8,
                           child: textFormFIled(
-                            "Ваше имя",
+                            "your_name".tr(),
                             context.watch<HomeCubit>().nameController,
                           ),
                         ),
@@ -71,7 +72,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                           height: context.h * 0.048,
                           width: context.w * 0.8,
                           child: textFormFIled(
-                            "Ваш номер",
+                            "your_phone".tr(),
                             context.watch<HomeCubit>().phoneNumberController,
                             keyboardType: TextInputType.number,
                           ),
@@ -83,7 +84,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                               height: context.h * 0.1,
                               width: context.w * 0.5,
                               child: textFormFIled(
-                                "Ваш адрес",
+                                "your_address".tr(),
                                 context.watch<HomeCubit>().locationController,
                                 keyboardType: TextInputType.streetAddress,
                               ),
@@ -115,7 +116,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: classicText("Заказать"),
+                    child: classicText("order".tr()),
                     onPressed: () {
                       Navigator.pop(context);
                       checkAlertDiolog(context);

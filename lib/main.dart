@@ -5,7 +5,9 @@ import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/routes/routes.dart';
 
-void main() async{
+String langState = 'ru-RU';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(
@@ -14,12 +16,14 @@ void main() async{
         BlocProvider(create: (context) => HomeCubit()),
       ],
       child: EasyLocalization(
-          supportedLocales: [
-            Locale('ru', 'RU'),
-            Locale('uz', 'UZ')
-          ],
-      path: 'assets/translation/',
-      child: const MyApp()),
+        supportedLocales: const [
+          Locale('ru', 'RU'),
+          Locale('uz', 'UZ'),
+        ],
+        path: 'assets/lang',
+        saveLocale: true,
+        child: const MyApp(),
+      ),
     ),
   );
 }

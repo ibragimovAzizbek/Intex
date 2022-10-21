@@ -12,7 +12,10 @@
   <string>tg</string>
   <string>tel</string>
   <string>insta</string>
+  <string>ru</string>
+  <string>uz</string>
 </array>
+
 
 <dict>
 	<key>CFBundleDevelopmentRegion</key>

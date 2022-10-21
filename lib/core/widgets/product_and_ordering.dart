@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intex/core/func/show_diolog_order_product.dart';
 import 'package:intex/extensions/mq_extension.dart';
@@ -49,16 +50,18 @@ Stack productAndOrdering(
                 Column(
                   children: [
                     Text(
-                      "$originalPrice сум",
+                      "$originalPrice  ${"currency_name".tr()}",
                       style: TextStyle(
                         color: ColorConst.salePriceColor,
                         decoration: TextDecoration.lineThrough,
                         decorationColor: ColorConst.saleLineColor,
                         decorationThickness: 3,
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
+                    SizedBox(height: context.h * 0.005),
                     Text(
-                      "$discountPrice сум",
+                      "$discountPrice  ${"currency_name".tr()}",
                       style: TextStyle(
                         color: ColorConst.black,
                       ),
@@ -78,7 +81,7 @@ Stack productAndOrdering(
                       color: ColorConst.primaryAmber,
                     ),
                     child: Text(
-                      "Заказать",
+                      "order".tr(),
                       style: TextStyle(color: ColorConst.black),
                     ),
                   ),
