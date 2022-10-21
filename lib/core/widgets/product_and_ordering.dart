@@ -107,8 +107,8 @@ Stack productAndOrdering(
             ),
             color: ColorConst.recommendColor,
           ),
-          child: const Text(
-            'Рекомендуем',
+          child: Text(
+            'recommended'.tr(),
             style: TextStyle(color: ColorConst.white),
             textAlign: TextAlign.center,
           ),

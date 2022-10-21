@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/constants/color_const.dart';
@@ -26,13 +27,13 @@ class HomeDrawer extends StatelessWidget {
             SizedBox(height: context.h * 0.11),
             drawerCategory(
               context,
-              "Каркасные бассейны",
+              "frame_pools".tr(),
               "/framePools", // ! PAGE"NI HAL QIL, YANGI PAGE YOKI UNIVERSIAL
             ),
             SizedBox(height: context.h * 0.03),
             drawerCategory(
               context,
-              "Надувные бассейны",
+              "inflatable_pools".tr(),
               "/inflatablePools", // ! PAGE"NI HAL QIL, YANGI PAGE YOKI UNIVERSIAL
             ),
             SizedBox(height: context.h * 0.27),
@@ -41,7 +42,7 @@ class HomeDrawer extends StatelessWidget {
             socialNetworkContainer(
               context,
               'assets/icons/phoneDrawer.png',
-              "Позвонить",
+              "call".tr(),
               () {
                 context.read<HomeCubit>().callButtonOnTap();
               },
@@ -52,7 +53,7 @@ class HomeDrawer extends StatelessWidget {
             socialNetworkContainer(
               context,
               'assets/icons/telegramDrawer.png',
-              "Телеграм",
+              "telegram".tr(),
               color: ColorConst.white,
               colorText: ColorConst.primaryColor,
               () {
@@ -65,7 +66,7 @@ class HomeDrawer extends StatelessWidget {
             socialNetworkContainer(
               context,
               'assets/icons/instagramDrawer.png',
-              "Инстаграм", // ! URL LOUNCHER ISHLATIB BOSHQA APPGA O'TADIGAN QILISH KERAK
+              "instagram".tr(), // ! URL LOUNCHER ISHLATIB BOSHQA APPGA O'TADIGAN QILISH KERAK
               color: ColorConst.white,
               colorText: ColorConst.primaryColor,
               () {

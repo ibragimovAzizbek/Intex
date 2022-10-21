@@ -125,7 +125,7 @@ class _HomeViewState extends State<HomeView> {
                             ],
                           ),
                           SizedBox(
-                            height: context.h * 0.3,
+                            height: context.h * 0.28,
                             width: context.w,
                             child: Image.asset(
                               'assets/images/bigImage.png',
@@ -143,7 +143,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     SizedBox(height: context.h * 0.01),
                     Text(
-                      "Бесплатная доставка бассейна",
+                      "free_sh_pool".tr(),
                       style: TextStyle(
                         fontSize: FontConst.meduimFont,
                         color: ColorConst.primaryColor,
@@ -151,8 +151,8 @@ class _HomeViewState extends State<HomeView> {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: context.h * 0.01),
-                    const Text(
-                      "Мы ценим наших клиентов, можете быть уверены в\nкачестве нашего сервиса!",
+                     Text(
+                      "we_service".tr(),
                       style: TextStyle(
                         fontSize: 14,
                         color: ColorConst.primaryColor,
@@ -160,21 +160,21 @@ class _HomeViewState extends State<HomeView> {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: context.h * 0.02),
-                    categoryContainer(context, "Каркасные бассейны"),
+                    categoryContainer(context, "frame_pools".tr()),
                     SizedBox(height: context.h * 0.02),
                     productAndOrdering(
                       context,
-                      "Металлический каркас",
+                      "metal_carcass".tr(),
                       'assets/images/bassen.png',
                       1600000,
                       1512000,
                     ),
                     SizedBox(height: context.h * 0.02),
-                    categoryContainer(context, "Надувные бассейны"),
+                    categoryContainer(context, "inflatable_pools".tr()),
                     SizedBox(height: context.h * 0.02),
                     productAndOrdering(
                       context,
-                      "Металлический каркас",
+                      "metal_carcass".tr(),
                       'assets/images/bassen.png',
                       1600000,
                       1512000,
@@ -218,7 +218,7 @@ class _HomeViewState extends State<HomeView> {
                             onPressed: () {
                               alertDiologOrderAProduct(
                                 context,
-                                "Металлический каркас",
+                                "metal_carcass".tr(),
                               );
                             },
                           ),
@@ -258,20 +258,20 @@ class _HomeViewState extends State<HomeView> {
                     SizedBox(height: context.h * 0.02),
                     Padding(
                       padding: EdgeInsets.only(left: context.w * 0.07),
-                      child: const SizedBox(
+                      child: SizedBox(
                         child: Text(
-                          "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи. Бассейн можно установить совершенно на любом участке и активно пользоваться им в летний период. Бассейн подарит вам яркие эмоции и спасет от жары в знойные летние дни.\n\nБассейны от intex отличаются обширным перечнем преимуществ, из которых можно выделить самые важные:",
+                          "pools_days".tr(),
                           textAlign: TextAlign.left,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                     SizedBox(height: context.h * 0.02),
-                    poolAdvantage(context, "Прочность"),
-                    poolAdvantage(context, "Простота установки"),
-                    poolAdvantage(context, "Красивые и ярки цвета"),
-                    poolAdvantage(context, "Стильный дизайн"),
-                    poolAdvantage(context, "Высокое качество"),
+                    poolAdvantage(context, "strength".tr()),
+                    poolAdvantage(context, "easy_to_install".tr()),
+                    poolAdvantage(context, "b_colors".tr()),
+                    poolAdvantage(context, "stylish_design".tr()),
+                    poolAdvantage(context, "high_quality".tr()),
                     SizedBox(height: context.h * 0.03),
                     Container(
                       height: context.h * 0.5,
@@ -347,7 +347,7 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   SizedBox(height: context.h * 0.01),
                                   classicText(
-                                    "Будние дни: 10:00 - 22:00\nБез выходных", // ! Database'dan keladi
+                                    "${"weekdays".tr()} 10:00 - 22:00\n${"seven_week".tr()}", // ! Database'dan keladi
                                     color: ColorConst.white,
                                     size: FontConst.smallFont,
                                   ),
@@ -445,7 +445,7 @@ class _HomeViewState extends State<HomeView> {
     Function function,
   ) {
     return IconButton(
-      iconSize: context.w * 0.1,
+      iconSize: context.w * 0.08,
       icon: Image.asset(
         path,
       ),
