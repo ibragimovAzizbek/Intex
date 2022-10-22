@@ -7,7 +7,6 @@ import 'package:flutter_geocoder/geocoder.dart';
 import 'package:intex/data/services/location/get_location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../main.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -25,6 +24,10 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void>? launched;
   String phone = '+998994294143';
   String path = 'https://t.me/ibragimov_azizbekk';
+
+  changeInitialState() {
+    emit(HomeInitial());
+  }
 
   checkCallSupport(bool result) {
     hasCallSupport = result;

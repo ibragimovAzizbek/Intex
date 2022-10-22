@@ -45,7 +45,9 @@
   "your_address": "Sizning manzilingiz",
   "to_consultation": "Maslahat olish uchun",
   "thank": "Rahmat!",
-  "your_time": "Buyurtmangiz muvaffaqiyatli joylashtirildi. Tez orada siz bilan bog'lanamiz."
+  "your_time": "Buyurtmangiz muvaffaqiyatli joylashtirildi. Tez orada siz bilan bog'lanamiz.",
+  "no_internet" : "Internet bilan aloqa yo'q, iltimos tekshirib qatadan urinib ko'ring."
+
 
 
 
