@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
-import 'package:intex/data/services/beckend/information_about_the_comp_service.dart';
 import 'package:intex/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await GetAbountCompany.inherentce.getCategory();
+  // await GetAbountCompany.inherentce.getCategory();
   runApp(
     MultiBlocProvider(
       providers: [
