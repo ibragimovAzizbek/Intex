@@ -81,7 +81,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                         Row(
                           children: [
                             SizedBox(
-                              height: context.h * 0.1,
+                              height: context.h * 0.05,
                               width: context.w * 0.5,
                               child: textFormFIled(
                                 "your_address".tr(),
@@ -92,7 +92,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                             IconButton(
                               iconSize: context.w * 0.15,
                               icon: SizedBox(
-                                height: context.h * 0.048,
+                                height: context.h * 0.043,
                                 width: context.w * 0.4,
                                 child: Image.asset(
                                   'assets/icons/location.png',
@@ -102,6 +102,19 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                               ),
                               onPressed: () async {
                                 await context.read<HomeCubit>().getLocation();
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (context) => SizedBox(
+                                //     height: context.h * 0.005,
+                                //     child: const AlertDialog(
+                                //       content: Center(
+                                //         child: CircularProgressIndicator
+                                //             .adaptive(),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // );
+                                // Navigator.pop(context);
                               },
                             ),
                           ],

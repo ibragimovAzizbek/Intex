@@ -46,6 +46,7 @@ dependencies:
   geolocator: ^9.0.2
   flutter_geocoder: ^0.2.2-nullsafety
   easy_localization: ^3.0.1
+  cached_network_image: ^3.2.2
   
 dev_dependencies:
   flutter_test:

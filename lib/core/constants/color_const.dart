@@ -11,7 +11,7 @@ class ColorConst {
   static Color saleColor = const Color(0xFFFFE500);
   static Color outOfStockColor = const Color(0xFFED2020);
   static Color blockColor = const Color(0xFFE2EFEF);
-  static Color backgroundColor = const Color(0xFFF8F8F8);
+  static const Color backgroundColor = Color(0xFFF8F8F8);
 
   static Color saleLineColor = const Color(0xFFFF0000);
 

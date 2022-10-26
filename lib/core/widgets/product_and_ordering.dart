@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:intex/core/base/base_api.dart';
 import 'package:intex/core/func/show_diolog_order_product.dart';
 import 'package:intex/extensions/mq_extension.dart';
 
@@ -12,6 +14,7 @@ Stack productAndOrdering(
   String imagePath,
   double originalPrice,
   double discountPrice,
+  String status,
 ) {
   return Stack(
     children: [
@@ -27,23 +30,27 @@ Stack productAndOrdering(
           color: ColorConst.white,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: FontConst.meduimFont,
-                color: ColorConst.primaryColor,
+            SizedBox(height: context.h * 0.057),
+            Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: FontConst.meduimFont,
+                  color: ColorConst.primaryColor,
+                ),
               ),
             ),
+            SizedBox(height: context.h * 0.016),
             SizedBox(
-              height: context.h * 0.14,
+              height: context.h * 0.16,
               width: context.w * 0.5,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-              ),
+              child: CachedNetworkImage(
+                  imageUrl: "${BaseApi.baseApiImage}$imagePath"),
             ),
+            SizedBox(height: context.h * 0.03),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -101,19 +108,50 @@ Stack productAndOrdering(
           alignment: Alignment.center,
           height: context.h * 0.03,
           width: context.w * 0.3,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
               bottomRight: Radius.circular(17),
             ),
-            color: ColorConst.recommendColor,
+            color: status == "recommended".tr()
+                ? ColorConst.recommendColor
+                : ColorConst.primaryAmber,
           ),
           child: Text(
-            'recommended'.tr(),
-            style: TextStyle(color: ColorConst.white),
+            status,
+            style: const TextStyle(color: ColorConst.white),
             textAlign: TextAlign.center,
           ),
         ),
       ),
+      // Positioned(
+      //   right: context.w * 0.1,
+      //   top: context.h * 0.15,
+      //   child: SizedBox(
+      //     height: context.h * 0.06,
+      //     child: Image.asset(
+      //       'assets/images/rowline.png',
+      //     ),
+      //   ),
+      // ),
+      // Positioned(
+      //   right: context.w * 0.1,
+      //   bottom: context.h * 0.1,
+      //   child: SizedBox(
+      //     width: context.w * 0.5,
+      //     child: Image.asset(
+      //       'assets/images/columnLine.png',
+      //     ),
+      //   ),
+      // ),
     ],
   );
 }
+
+
+// productAndOrdering(
+// context,
+// data[1][index].frameUz,
+// data[1][index].image,
+// data[1][index].oldPrice,
+// data[1][index].oldPrice,
+//                                               );

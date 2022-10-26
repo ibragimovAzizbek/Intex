@@ -7,6 +7,7 @@ import 'package:flutter_geocoder/geocoder.dart';
 import 'package:intex/data/services/location/get_location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../data/model/products_model.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -19,6 +20,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   var location;
   var address;
+
+  List<Map<int, List<ProductsModel>>> lstProducts = [];
 
   bool hasCallSupport = false;
   Future<void>? launched;
