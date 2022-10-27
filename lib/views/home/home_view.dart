@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/base/base_view.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/core/constants/font_const.dart';
+import 'package:intex/core/widgets/app_bar.dart';
 import 'package:intex/core/widgets/product_and_ordering.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
-import 'package:intex/data/services/beckend/information_about_the_comp_service.dart';
 import 'package:intex/extensions/mq_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,8 +40,14 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      backgroundColor: ColorConst.backgroundColor,
+      backgroundColor: ColorConst.white,
       drawer: const HomeDrawer(),
+      appBar: HomeAppBar(
+        homeContext: context,
+        function: () {
+          _key.currentState!.openDrawer();
+        },
+      ),
       body: BaseView(
         viewModel: HomeView,
         onPageBuilder: (context, value) {
@@ -51,7 +56,6 @@ class _HomeViewState extends State<HomeView> {
               [
                 CategoryService.inherentce.getCatrgory(),
                 ProductService.inherentce.getProducts(),
-                // GetAbountCompany.inherentce.getCatrgory()
               ],
             ),
             builder: (context, AsyncSnapshot snapshot) {
@@ -90,120 +94,6 @@ class _HomeViewState extends State<HomeView> {
                         child: CustomScrollView(
                           physics: const ClampingScrollPhysics(),
                           slivers: [
-                            SliverAppBar(
-                              automaticallyImplyLeading: false,
-                              expandedHeight: context.h * 0.4,
-                              snap: false,
-                              pinned: false,
-                              floating: true,
-                              flexibleSpace: Container(
-                                alignment: Alignment.center,
-                                height: context.h * 0.4,
-                                width: double.infinity,
-                                color: ColorConst.primaryColor,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            "INTEX-MARKET.UZ",
-                                            style: TextStyle(
-                                              color: ColorConst.white,
-                                              fontSize: FontConst.largeFont,
-                                            ),
-                                          ),
-                                          // ? Button to switch to Call
-                                          Wrap(
-                                            children: [
-                                              topIconButton(
-                                                context,
-                                                'assets/icons/phone2.png',
-                                                () {
-                                                  context
-                                                      .read<HomeCubit>()
-                                                      .callButtonOnTap();
-                                                },
-                                              ),
-                                              // ?  Button to switch to telegram
-                                              topIconButton(
-                                                context,
-                                                'assets/icons/telegram2.png',
-                                                () {
-                                                  context
-                                                      .read<HomeCubit>()
-                                                      .telegramOnTap();
-                                                },
-                                              ),
-                                              // ? Button to change the language
-                                              topIconButton(
-                                                context,
-                                                context.locale.toString() ==
-                                                        "uz_UZ"
-                                                    ? 'assets/icons/languageru.png'
-                                                    : 'assets/icons/languageuz.png',
-                                                () {
-                                                  switch (context.locale
-                                                      .toString()) {
-                                                    case "uz_UZ":
-                                                      context.setLocale(
-                                                        const Locale(
-                                                          "ru",
-                                                          "RU",
-                                                        ),
-                                                      );
-                                                      break;
-                                                    case "ru_RU":
-                                                      context.setLocale(
-                                                        const Locale(
-                                                          "uz",
-                                                          "UZ",
-                                                        ),
-                                                      );
-                                                      break;
-                                                  }
-                                                },
-                                              ),
-                                              // ? Button to Open Drawer
-                                              topIconButton(
-                                                context,
-                                                'assets/icons/menu.png',
-                                                () {
-                                                  _key.currentState!
-                                                      .openDrawer();
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 6,
-                                      child: SizedBox(
-                                        height: context.h * 0.23,
-                                        width: context.w,
-                                        child: Image.asset(
-                                          'assets/images/bigImage.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    // ? Seasonal sale -> text
-                                    classicText(
-                                      "seasonal_sale".tr(),
-                                      color: ColorConst.white,
-                                      size: FontConst.extraLargeFont,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
                             SliverToBoxAdapter(
                               child: Column(
                                 children: [
@@ -501,22 +391,6 @@ class _HomeViewState extends State<HomeView> {
           );
         },
       ),
-    );
-  }
-
-  IconButton topIconButton(
-    BuildContext context,
-    String path,
-    Function function,
-  ) {
-    return IconButton(
-      // iconSize: context.w * 0.15,
-      icon: Image.asset(
-        path,
-      ),
-      onPressed: () {
-        function();
-      },
     );
   }
 

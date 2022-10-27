@@ -33,9 +33,11 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'Intex Market',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: ColorConst.backgroundColor,
+      theme: ThemeData.light().copyWith(
+        // primaryColor: ColorConst.baseBackground,
+        // brightness: Brightness.light,
+        backgroundColor: const Color(0xFFE5E5E5),
+        colorScheme: ColorScheme.light(primary: ColorConst.baseBackground),
       ),
       initialRoute: '/home',
       onGenerateRoute: RouteCont.inherentce.onGenerateRoute,
