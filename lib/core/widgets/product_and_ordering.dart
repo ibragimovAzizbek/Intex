@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intex/core/base/base_api.dart';
-import 'package:intex/core/func/show_diolog_order_product.dart';
+import 'package:intex/core/components/eleveted_button.dart';
+import 'package:intex/core/widgets/classic_text.dart';
 import 'package:intex/extensions/mq_extension.dart';
 
 import '../constants/color_const.dart';
@@ -14,135 +14,87 @@ Stack productAndOrdering(
   String imagePath,
   double originalPrice,
   double discountPrice,
+  String sizeSwimmingPool,
   String status,
 ) {
   return Stack(
     children: [
-      Container(
-        height: context.h * 0.35,
-        width: context.w * 0.8,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(40),
-            bottomRight: Radius.circular(40),
-            topRight: Radius.circular(40),
+      Padding(
+        padding: EdgeInsets.only(left: context.w * 0.021),
+        child: Container(
+          width: context.w * 0.7,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: ColorConst.white,
           ),
-          color: ColorConst.white,
-        ),
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: context.h * 0.057),
-            Center(
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: FontConst.meduimFont,
-                  color: ColorConst.primaryColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: context.h * 0.05),
+              Center(
+                child: SizedBox(
+                  height: context.h * 0.16,
+                  width: context.w * 0.5,
+                  child: CachedNetworkImage(imageUrl: imagePath),
                 ),
               ),
-            ),
-            SizedBox(height: context.h * 0.016),
-            SizedBox(
-              height: context.h * 0.16,
-              width: context.w * 0.5,
-              child: CachedNetworkImage(
-                  imageUrl: "${BaseApi.baseApiImage}$imagePath"),
-            ),
-            SizedBox(height: context.h * 0.03),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
+              SizedBox(height: context.h * 0.02),
+              Divider(thickness: 3, color: ColorConst.containerBackground),
+              SizedBox(height: context.h * 0.01),
+              Padding(
+                padding: EdgeInsets.only(left: context.w * 0.035),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    SizedBox(
+                      width: context.w * 0.8,
+                      child: classicText(text, size: FontConst.meduimFont),
+                    ),
+                    SizedBox(height: context.h * 0.013),
+                    classicText(sizeSwimmingPool,
+                        color: ColorConst.textColor,
+                        fontWeight: FontWeight.normal,
+                        size: FontConst.meduimFont - 2),
+                    SizedBox(height: context.h * 0.013),
+                    classicText(
                       "$originalPrice  ${"currency_name".tr()}",
-                      style: TextStyle(
-                        color: ColorConst.salePriceColor,
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: ColorConst.saleLineColor,
-                        decorationThickness: 3,
-                        fontStyle: FontStyle.italic,
-                      ),
+                      decoration: TextDecoration.lineThrough,
+                      color: ColorConst.salePriceColor,
+                      size: FontConst.smallFont,
                     ),
                     SizedBox(height: context.h * 0.005),
-                    Text(
-                      "$discountPrice  ${"currency_name".tr()}",
-                      style: TextStyle(
-                        color: ColorConst.black,
-                      ),
+                    classicText(
+                      "$discountPrice ${"currency_name".tr()}",
+                      color: ColorConst.accentColor,
+                      size: FontConst.meduimFont - 2,
                     ),
                   ],
                 ),
-                InkWell(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: context.h * 0.035,
-                    width: context.w * 0.25,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                      color: ColorConst.primaryAmber,
-                    ),
-                    child: Text(
-                      "order".tr(),
-                      style: TextStyle(color: ColorConst.black),
-                    ),
-                  ),
-                  onTap: () {
-                    alertDiologOrderAProduct(context, text);
-                  },
-                ),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: context.h * 0.017),
+              Center(child: elevatedButtonMeduim(context, "Заказать", () {}))
+            ],
+          ),
         ),
       ),
       Positioned(
-        top: 1,
-        left: 2,
+        top: 16,
+        left: 9,
         child: Container(
           alignment: Alignment.center,
-          height: context.h * 0.03,
-          width: context.w * 0.3,
+          height: context.h * 0.037,
+          width: context.w * 0.28,
           decoration: BoxDecoration(
+            color: ColorConst.statusPopular,
             borderRadius: const BorderRadius.only(
-              bottomRight: Radius.circular(17),
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
             ),
-            color: status == "recommended".tr()
-                ? ColorConst.recommendColor
-                : ColorConst.primaryAmber,
           ),
-          child: Text(
-            status,
-            style: const TextStyle(color: ColorConst.white),
-            textAlign: TextAlign.center,
-          ),
+          child: classicText("Хит продаж",
+              size: FontConst.smallFont, color: ColorConst.white),
         ),
-      ),
-      // Positioned(
-      //   right: context.w * 0.1,
-      //   top: context.h * 0.15,
-      //   child: SizedBox(
-      //     height: context.h * 0.06,
-      //     child: Image.asset(
-      //       'assets/images/rowline.png',
-      //     ),
-      //   ),
-      // ),
-      // Positioned(
-      //   right: context.w * 0.1,
-      //   bottom: context.h * 0.1,
-      //   child: SizedBox(
-      //     width: context.w * 0.5,
-      //     child: Image.asset(
-      //       'assets/images/columnLine.png',
-      //     ),
-      //   ),
-      // ),
+      )
     ],
   );
 }

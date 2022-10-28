@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/base/base_view.dart';
+import 'package:intex/core/components/eleveted_button.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/core/widgets/app_bar.dart';
@@ -11,10 +12,8 @@ import 'package:intex/cubit/home/home_state.dart';
 import 'package:intex/extensions/mq_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../core/func/show_diolog_check.dart';
 import '../../core/widgets/classic_text.dart';
 import '../../core/widgets/drawer.dart';
-import '../../core/widgets/text_form_filed.dart';
 import '../../data/services/beckend/category_service.dart';
 import '../../data/services/beckend/products_service.dart';
 
@@ -27,6 +26,10 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  final ScrollController controller = ScrollController();
+  // final double _height = 100.0;
+  int superIndex = 0;
 
   @override
   void initState() {
@@ -91,9 +94,206 @@ class _HomeViewState extends State<HomeView> {
                           child: CircularProgressIndicator.adaptive());
                     } else if (state is HomeInitial) {
                       return SafeArea(
-                        child: CustomScrollView(
-                          physics: const ClampingScrollPhysics(),
-                          slivers: [
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: context.h * 0.024),
+                              Center(
+                                child: Container(
+                                  height: context.h * 0.55,
+                                  width: context.w * 0.9,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: ColorConst.containerBackground,
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(left: context.w * 0.03),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        SizedBox(
+                                          width: context.w * 0.8,
+                                          child: classicText(
+                                              "Бассейны от intex в Ташкенте"),
+                                        ),
+                                        SizedBox(
+                                          width: context.w * 0.8,
+                                          child: classicText(
+                                            "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи.",
+                                            size: FontConst.largeFont - 2,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        Image.asset(
+                                            'assets/images/intexbassen.png'),
+                                        elevatedButtonBig(
+                                          context,
+                                          "Заказать звонок",
+                                          () {
+                                            context
+                                                .read<HomeCubit>()
+                                                .callButtonOnTap();
+                                          },
+                                        ),
+                                        SizedBox(height: context.h * 0.01),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: context.h * 0.069),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  classicText('Популярные товары',
+                                      size: FontConst.largeFont + 2),
+                                  Wrap(
+                                    children: [
+                                      chevronRightAndLeftButton(
+                                        context,
+                                        'assets/icons/chevronLeft.png',
+                                        () {},
+                                      ),
+                                      chevronRightAndLeftButton(
+                                        context,
+                                        'assets/icons/chevronRight.png',
+                                        () {
+                                          controller.animateTo(100,
+                                              duration: Duration(seconds: 2),
+                                              curve: Curves.ease);
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              Container(
+                                color: ColorConst.containerBackground,
+                                height: context.h * 0.48,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    superIndex = index;
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                      ),
+                                      child: productAndOrdering(
+                                        context,
+                                        "Каркасный прямоугольный\nбассейн",
+                                        "https://i7.imageban.ru/out/2022/02/01/7873a774e6a8bec056bb64e6412b56f3.jpg",
+                                        1265.546,
+                                        654138,
+                                        "220х150х60см, 1662л",
+                                        "Хит продаж",
+                                      ),
+                                    );
+                                  },
+                                  itemCount: data[1].length,
+                                ),
+                              ),
+                              SizedBox(height: context.h * 0.2)
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text(
+                          "SERVERDA XATOLIK BOR, BALKI INTERNET BILAN ALOQA YO'Q.",
+                          style: TextStyle(
+                            fontSize: FontConst.extraLargeFont,
+                            color: ColorConst.blockColor,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                );
+              }
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  IconButton chevronRightAndLeftButton(
+      BuildContext context, String path, Function function) {
+    return IconButton(
+      icon: CircleAvatar(
+        backgroundColor: ColorConst.containerBackground,
+        child: SizedBox(
+          width: context.w * 0.06,
+          child: Image.asset(
+            path,
+          ),
+        ),
+      ),
+      onPressed: () {
+        function();
+      },
+    );
+  }
+
+  Padding poolAdvantage(BuildContext context, String text) {
+    return Padding(
+      padding: EdgeInsets.only(left: context.w * 0.07),
+      child: Row(
+        children: [
+          Image.asset('assets/icons/checkCircle.png'),
+          SizedBox(width: context.w * 0.02),
+          classicText(text, size: FontConst.meduimFont),
+        ],
+      ),
+    );
+  }
+
+  IconButton iconButton(
+    BuildContext context,
+    String path,
+    Function function,
+  ) {
+    return IconButton(
+      iconSize: context.w * 0.05,
+      icon: Image.asset(
+        path,
+        fit: BoxFit.cover,
+      ),
+      onPressed: () {
+        function();
+      },
+    );
+  }
+
+  Container categoryContainer(
+    BuildContext context,
+    String text, {
+    Color color = ColorConst.primaryColor,
+    Color textColor = ColorConst.white,
+  }) {
+    return Container(
+      alignment: Alignment.center,
+      height: context.h * 0.045,
+      width: context.w,
+      color: color,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: FontConst.extraLargeFont,
+          color: textColor,
+        ),
+      ),
+    );
+  }
+
+  /* slivers: [
                             SliverToBoxAdapter(
                               child: Column(
                                 children: [
@@ -370,78 +570,5 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return Center(
-                        child: Text(
-                          "SERVERDA XATOLIK BOR, BALKI INTERNET BILAN ALOQA YO'Q.",
-                          style: TextStyle(
-                            fontSize: FontConst.extraLargeFont,
-                            color: ColorConst.blockColor,
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                );
-              }
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  Padding poolAdvantage(BuildContext context, String text) {
-    return Padding(
-      padding: EdgeInsets.only(left: context.w * 0.07),
-      child: Row(
-        children: [
-          Image.asset('assets/icons/checkCircle.png'),
-          SizedBox(width: context.w * 0.02),
-          classicText(text, size: FontConst.meduimFont),
-        ],
-      ),
-    );
-  }
-
-  IconButton iconButton(
-    BuildContext context,
-    String path,
-    Function function,
-  ) {
-    return IconButton(
-      iconSize: context.w * 0.05,
-      icon: Image.asset(
-        path,
-        fit: BoxFit.cover,
-      ),
-      onPressed: () {
-        function();
-      },
-    );
-  }
-
-  Container categoryContainer(
-    BuildContext context,
-    String text, {
-    Color color = ColorConst.primaryColor,
-    Color textColor = ColorConst.white,
-  }) {
-    return Container(
-      alignment: Alignment.center,
-      height: context.h * 0.045,
-      width: context.w,
-      color: color,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: FontConst.extraLargeFont,
-          color: textColor,
-        ),
-      ),
-    );
-  }
+                          ],*/
 }

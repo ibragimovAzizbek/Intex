@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/extensions/mq_extension.dart';
 
 import '../../cubit/home/home_cubit.dart';
@@ -25,7 +26,9 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                classicText("INTEX-MARKET.UZ", color: ColorConst.accentColor),
+                classicText("INTEX-MARKET.UZ",
+                    color: ColorConst.accentColor,
+                    size: FontConst.largeFont + 2),
                 SizedBox(width: context.w * 0.3),
                 topIconButton(
                   context,
