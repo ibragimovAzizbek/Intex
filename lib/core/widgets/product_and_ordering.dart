@@ -85,13 +85,15 @@ Stack productAndOrdering(
           height: context.h * 0.037,
           width: context.w * 0.28,
           decoration: BoxDecoration(
-            color: ColorConst.statusPopular,
+            color: status == "Хит продаж"
+                ? ColorConst.statusPopular
+                : ColorConst.statusNew,
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(8),
               bottomRight: Radius.circular(8),
             ),
           ),
-          child: classicText("Хит продаж",
+          child: classicText(status,
               size: FontConst.smallFont, color: ColorConst.white),
         ),
       )

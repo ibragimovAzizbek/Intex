@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +29,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  final ScrollController controller = ScrollController();
-  // final double _height = 100.0;
   int superIndex = 0;
 
   @override
@@ -54,172 +54,271 @@ class _HomeViewState extends State<HomeView> {
       body: BaseView(
         viewModel: HomeView,
         onPageBuilder: (context, value) {
-          return FutureBuilder(
-            future: Future.wait(
-              [
-                CategoryService.inherentce.getCatrgory(),
-                ProductService.inherentce.getProducts(),
-              ],
-            ),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: classicText("ERROR: ${snapshot.error}"));
-              } else {
-                var data = snapshot.data;
-                for (int i = 0; i < data[0].length; i++) {
-                  context.watch<HomeCubit>().lstProducts.add(
-                    {
-                      data[0][i].id: data[1]
-                          .where(
-                              (element) => element.categoryId == data[0][i].id)
-                          .toList()
-                    },
-                  );
-                }
-                return BlocConsumer<HomeCubit, HomeState>(
-                  listener: (context, state) {
-                    if (state is HomeError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Error: ${state.msg}"),
-                        ),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is HomeLoading) {
-                      return const Center(
-                          child: CircularProgressIndicator.adaptive());
-                    } else if (state is HomeInitial) {
-                      return SafeArea(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: context.h * 0.024),
-                              Center(
-                                child: Container(
-                                  height: context.h * 0.55,
-                                  width: context.w * 0.9,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: ColorConst.containerBackground,
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.only(left: context.w * 0.03),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        SizedBox(
-                                          width: context.w * 0.8,
-                                          child: classicText(
-                                              "Бассейны от intex в Ташкенте"),
-                                        ),
-                                        SizedBox(
-                                          width: context.w * 0.8,
-                                          child: classicText(
-                                            "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи.",
-                                            size: FontConst.largeFont - 2,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                        Image.asset(
-                                            'assets/images/intexbassen.png'),
-                                        elevatedButtonBig(
-                                          context,
-                                          "Заказать звонок",
-                                          () {
-                                            context
-                                                .read<HomeCubit>()
-                                                .callButtonOnTap();
-                                          },
-                                        ),
-                                        SizedBox(height: context.h * 0.01),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: context.h * 0.069),
-                              Row(
+          return BlocConsumer<HomeCubit, HomeState>(
+            listener: (context, state) {
+              if (state is HomeError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Error: ${state.msg}"),
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is HomeLoading) {
+                return const Center(
+                    child: CircularProgressIndicator.adaptive());
+              } else if (state is HomeInitial) {
+                return SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: context.h * 0.024),
+                        Center(
+                          child: Container(
+                            height: context.h * 0.55,
+                            width: context.w * 0.9,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: ColorConst.containerBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: context.w * 0.03),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  classicText('Популярные товары',
-                                      size: FontConst.largeFont + 2),
-                                  Wrap(
-                                    children: [
-                                      chevronRightAndLeftButton(
-                                        context,
-                                        'assets/icons/chevronLeft.png',
-                                        () {},
-                                      ),
-                                      chevronRightAndLeftButton(
-                                        context,
-                                        'assets/icons/chevronRight.png',
-                                        () {
-                                          controller.animateTo(100,
-                                              duration: Duration(seconds: 2),
-                                              curve: Curves.ease);
-                                        },
-                                      ),
-                                    ],
-                                  )
+                                  SizedBox(
+                                    width: context.w * 0.8,
+                                    child: classicText(
+                                        "Бассейны от intex в Ташкенте"),
+                                  ),
+                                  SizedBox(
+                                    width: context.w * 0.8,
+                                    child: classicText(
+                                      "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи.",
+                                      size: FontConst.largeFont - 2,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  Image.asset('assets/images/intexbassen.png'),
+                                  elevatedButtonBig(
+                                    context,
+                                    "Заказать звонок",
+                                    () {
+                                      context
+                                          .read<HomeCubit>()
+                                          .callButtonOnTap();
+                                    },
+                                  ),
+                                  SizedBox(height: context.h * 0.01),
                                 ],
                               ),
-                              Container(
-                                color: ColorConst.containerBackground,
-                                height: context.h * 0.48,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    superIndex = index;
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      child: productAndOrdering(
-                                        context,
-                                        "Каркасный прямоугольный\nбассейн",
-                                        "https://i7.imageban.ru/out/2022/02/01/7873a774e6a8bec056bb64e6412b56f3.jpg",
-                                        1265.546,
-                                        654138,
-                                        "220х150х60см, 1662л",
-                                        "Хит продаж",
-                                      ),
-                                    );
-                                  },
-                                  itemCount: data[1].length,
-                                ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: context.h * 0.069),
+                        categoryForProducts(
+                          context,
+                          categoryName: "Популярные товары",
+                          status: "Хит продаж",
+                          imagePath:
+                              "https://i7.imageban.ru/out/2022/02/01/7873a774e6a8bec056bb64e6412b56f3.jpg",
+                          poolType: "Каркасный прямоугольный бассейн",
+                          newPrice: 485445448,
+                          oldPrice: 956465157,
+                          size: " 220х150х60см, 1662л",
+                        ),
+                        SizedBox(height: context.h * 0.05),
+                        Container(
+                          padding: EdgeInsets.only(left: context.w * 0.05),
+                          color: ColorConst.containerBackground,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: context.h * 0.04),
+                              classicText("Бассейны от INTEX в Ташкенте",
+                                  size: FontConst.meduimFont + 2),
+                              SizedBox(height: context.h * 0.016),
+                              classicText(
+                                "Бассейны от intex отличаются обширным перечнем преимуществ, из которых можно выделить самые важные:",
+                                size: FontConst.meduimFont - 2,
+                                color: ColorConst.textColor,
                               ),
-                              SizedBox(height: context.h * 0.2)
+                              SizedBox(height: context.h * 0.05),
+                              ourAmenities(context, "Высокое качество"),
+                              ourAmenities(context, "Прочность"),
+                              ourAmenities(context, "Простота установки"),
+                              ourAmenities(context, "Красивые и ярки цвета"),
+                              ourAmenities(context, "Стильный дизайн"),
+                              SizedBox(height: context.h * 0.02),
+                              SizedBox(
+                                child:
+                                    Image.asset('assets/images/IntexPool.png'),
+                              ),
+                              SizedBox(height: context.h * 0.05),
                             ],
                           ),
                         ),
-                      );
-                    } else {
-                      return Center(
-                        child: Text(
-                          "SERVERDA XATOLIK BOR, BALKI INTERNET BILAN ALOQA YO'Q.",
-                          style: TextStyle(
-                            fontSize: FontConst.extraLargeFont,
-                            color: ColorConst.blockColor,
-                          ),
+                        SizedBox(height: context.h * 0.03),
+                        categoryForProducts(
+                          context,
+                          categoryName: "Новые товары",
+                          status: "Новинки",
+                          imagePath:
+                              "https://i7.imageban.ru/out/2022/02/01/7873a774e6a8bec056bb64e6412b56f3.jpg",
+                          newPrice: 994651,
+                          oldPrice: 4561648,
+                          poolType: "Каркасный прямоугольный бассейн ",
+                          size: "220х150х60см, 1662л",
                         ),
-                      );
-                    }
-                  },
+                        SizedBox(height: context.h * 0.05),
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return Center(
+                  child: Text(
+                    "SERVERDA XATOLIK BOR, BALKI INTERNET BILAN ALOQA YO'Q.",
+                    style: TextStyle(
+                      fontSize: FontConst.extraLargeFont,
+                      color: ColorConst.blockColor,
+                    ),
+                  ),
                 );
               }
             },
           );
+
+          //? FutureBuilder(
+          //?   future: Future.wait(
+          //?     [
+          //?       CategoryService.inherentce.getCatrgory(),
+          //?       ProductService.inherentce.getProducts(),
+          //?     ],
+          //?   ),
+          //?   builder: (context, AsyncSnapshot snapshot) {
+          //?     if (!snapshot.hasData) {
+          //?       return const Center(child: CircularProgressIndicator());
+          //?     } else if (snapshot.hasError) {
+          //?       return Center(child: classicText("ERROR: ${snapshot.error}"));
+          //?     } else {
+          //?       var data = snapshot.data;
+          //?       for (int i = 0; i < data[0].length; i++) {
+          //?         context.watch<HomeCubit>().lstProducts.add(
+          //?           {
+          //?             data[0][i].id: data[1]
+          //?                 .where(
+          //?                     (element) => element.categoryId == data[0][i].id)
+          //?                 .toList()
+          //?           },
+          //?         );
+          //?       }
+          //?       return
+          //?     }
+          //?   },
+          //? );
         },
+      ),
+    );
+  }
+
+  Column categoryForProducts(
+    BuildContext context, {
+    required String categoryName,
+    required String status,
+    required String poolType,
+    required String size,
+    required String imagePath,
+    required double oldPrice,
+    required double newPrice,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              EdgeInsets.only(left: context.w * 0.05, right: context.w * 0.02),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              classicText(categoryName, size: FontConst.largeFont + 2),
+              Wrap(
+                children: [
+                  chevronRightAndLeftButton(
+                    context,
+                    'assets/icons/chevronLeft.png',
+                    () {},
+                  ),
+                  chevronRightAndLeftButton(
+                    context,
+                    'assets/icons/chevronRight.png',
+                    () {
+                      // ! Buni to'g'irla bolakay button bosgan scroll bo'lishi kerak
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+        Container(
+          color: ColorConst.containerBackground,
+          height: context.h * 0.48,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              superIndex = index;
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: productAndOrdering(
+                  context,
+                  poolType,
+                  imagePath,
+                  oldPrice,
+                  newPrice,
+                  size,
+                  status,
+                ),
+              );
+            },
+            itemCount: 3,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Chip ourAmenities(
+    BuildContext context,
+    String text,
+  ) {
+    return Chip(
+      backgroundColor: ColorConst.white,
+      label: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: context.w * 0.055,
+            child: Image.asset(
+              'assets/icons/roundedCheckbox.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: context.w * 0.02),
+          classicText(
+            text,
+            color: Colors.black,
+            size: FontConst.meduimFont + 2,
+            fontWeight: FontWeight.w500,
+          ),
+        ],
       ),
     );
   }
