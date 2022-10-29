@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geocoder/geocoder.dart';
 import 'package:intex/data/services/location/get_location.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/model/products_model.dart';
@@ -17,6 +18,8 @@ class HomeCubit extends Cubit<HomeState> {
   TextEditingController phoneNumberController =
       TextEditingController(text: "+998 ");
   TextEditingController locationController = TextEditingController();
+   String initialCountry = 'UZ';
+  PhoneNumber number = PhoneNumber(isoCode: 'UZ');
 
   var location;
   var address;

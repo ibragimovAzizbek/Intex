@@ -18,7 +18,7 @@ class ColorConst {
 
   // ? New UI Color
 
-  static const Color black =  Color(0xFF24283A);
+  static const Color black = Color(0xFF24283A);
   static Color baseColor = const Color(0xFF2B3D90);
   static Color accentColor = const Color(0xFF109EF4);
   static Color textColor = const Color(0xFF464A4D);
@@ -30,4 +30,6 @@ class ColorConst {
   static Color statusDiscount = const Color(0xFFFF5C5C);
   static Color baseBackground = const Color(0xFFFAFAFA);
   static Color containerBackground = const Color(0xFFF7F9FA);
+  static Color skyDarck = const Color(0xFFB4B6B8);
+  static Color textformBorderColor = const Color(0xFFE3E5E5);
 }

@@ -9,9 +9,11 @@ import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/core/widgets/app_bar.dart';
 import 'package:intex/core/widgets/product_and_ordering.dart';
+import 'package:intex/core/widgets/text_form_filed.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
 import 'package:intex/extensions/mq_extension.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/widgets/classic_text.dart';
@@ -29,14 +31,22 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  int superIndex = 0;
-
   @override
   void initState() {
     super.initState();
     canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
       context.read<HomeCubit>().checkCallSupport(result);
     });
+  }
+
+  final ScrollController _controller = ScrollController();
+  final double _height = 100.0;
+  void _animateToIndex(int index) {
+    _controller.animateTo(
+      index * _height,
+      duration: Duration(seconds: 5),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   @override
@@ -175,6 +185,116 @@ class _HomeViewState extends State<HomeView> {
                           size: "220х150х60см, 1662л",
                         ),
                         SizedBox(height: context.h * 0.05),
+                        Container(
+                          padding: EdgeInsets.only(left: context.w * 0.032),
+                          color: ColorConst.containerBackground,
+                          height: context.h,
+                          width: context.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: context.h * 0.04),
+                              classicText("Купить оптом",
+                                  size: FontConst.meduimFont + 2),
+                              SizedBox(height: context.h * 0.02),
+                              classicText(
+                                "Если вы хотите купить товары по оптовой цене, вы должны заказать не менее 20 товаров.",
+                                size: FontConst.meduimFont - 2,
+                              ),
+                              SizedBox(height: context.h * 0.024),
+                              SizedBox(
+                                width: context.w * 0.85,
+                                child: Image.asset(
+                                    'assets/images/karkasniybaseyn.png'),
+                              ),
+                              SizedBox(height: context.h * 0.01),
+                              Container(
+                                height: context.h * 0.37,
+                                width: context.w * 0.9,
+                                decoration: BoxDecoration(
+                                  color: ColorConst.white,
+                                  borderRadius: BorderRadius.circular(
+                                    12,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(left: context.w * 0.03),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: context.h * 0.02),
+                                      classicText("Имя",
+                                          size: FontConst.meduimFont),
+                                      SizedBox(height: context.h * 0.02),
+                                      SizedBox(
+                                        width: context.w * 0.8,
+                                        height: context.h * 0.06,
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            hintText: 'Введите ваше имя',
+                                            hintStyle: TextStyle(
+                                                color: ColorConst.skyDarck),
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: ColorConst
+                                                      .textformBorderColor),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: context.h * 0.02),
+                                      classicText("Номер телефона",
+                                          size: FontConst.meduimFont),
+                                      SizedBox(height: context.h * 0.02),
+                                      Container(
+                                        width: context.w * 0.8,
+                                        alignment: Alignment.center,
+                                        padding:
+                                            const EdgeInsets.only(left: 12),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: const Color(0xFFCBCBCB),
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: ColorConst.white),
+                                        child: InternationalPhoneNumberInput(
+                                          onInputChanged: (PhoneNumber number) {
+                                            print(number.phoneNumber);
+                                          },
+                                          cursorColor: ColorConst.black,
+                                          // selectorConfig: const SelectorConfig(
+                                          //   selectorType:
+                                          //       PhoneInputSelectorType.DIALOG,
+                                          // ),
+                                          inputDecoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    bottom: 15, left: 0),
+                                            border: InputBorder.none,
+                                            hintText: "(90) 123 45 67",
+                                            hintStyle: TextStyle(
+                                              color: Colors.grey.shade500,
+                                              fontSize: FontConst.meduimFont,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: context.h * 0.02),
+                                      elevatedButtonBig(
+                                          context, "Отправить", () {}),
+                                      SizedBox(height: context.h * 0.02),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -258,6 +378,7 @@ class _HomeViewState extends State<HomeView> {
                     'assets/icons/chevronRight.png',
                     () {
                       // ! Buni to'g'irla bolakay button bosgan scroll bo'lishi kerak
+                      // _animateToIndex(5);
                     },
                   ),
                 ],
@@ -271,7 +392,7 @@ class _HomeViewState extends State<HomeView> {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              superIndex = index;
+              // superIndex = index;
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -287,7 +408,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               );
             },
-            itemCount: 3,
+            itemCount: 6,
           ),
         ),
       ],
@@ -341,19 +462,6 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Padding poolAdvantage(BuildContext context, String text) {
-    return Padding(
-      padding: EdgeInsets.only(left: context.w * 0.07),
-      child: Row(
-        children: [
-          Image.asset('assets/icons/checkCircle.png'),
-          SizedBox(width: context.w * 0.02),
-          classicText(text, size: FontConst.meduimFont),
-        ],
-      ),
-    );
-  }
-
   IconButton iconButton(
     BuildContext context,
     String path,
@@ -368,27 +476,6 @@ class _HomeViewState extends State<HomeView> {
       onPressed: () {
         function();
       },
-    );
-  }
-
-  Container categoryContainer(
-    BuildContext context,
-    String text, {
-    Color color = ColorConst.primaryColor,
-    Color textColor = ColorConst.white,
-  }) {
-    return Container(
-      alignment: Alignment.center,
-      height: context.h * 0.045,
-      width: context.w,
-      color: color,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: FontConst.extraLargeFont,
-          color: textColor,
-        ),
-      ),
     );
   }
 

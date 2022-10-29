@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/color_const.dart';
 
-Container textFormFIled(
+Container textFormFiled(
   String hintText,
   TextEditingController controller, {
   TextInputType keyboardType = TextInputType.name,
