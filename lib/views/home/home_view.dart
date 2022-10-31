@@ -362,7 +362,11 @@ class _HomeViewState extends State<HomeView> {
                                   iconButton(
                                     context,
                                     "assets/icons/instagram.png",
-                                    () {},
+                                    () async {
+                                      await context
+                                          .read<HomeCubit>()
+                                          .instagramOnTap();
+                                    },
                                   ),
                                   SizedBox(width: context.w * 0.03),
                                   iconButton(

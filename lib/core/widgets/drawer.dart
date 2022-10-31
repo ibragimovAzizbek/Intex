@@ -132,7 +132,7 @@ class HomeDrawer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, pathPage);
+        // Navigator.pushNamed(context, pathPage);
       },
     );
   }
