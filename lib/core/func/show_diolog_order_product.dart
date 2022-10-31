@@ -62,7 +62,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                         SizedBox(
                           height: context.h * 0.048,
                           width: context.w * 0.8,
-                          child: textFormFIled(
+                          child: textFormFiled(
                             "your_name".tr(),
                             context.watch<HomeCubit>().nameController,
                           ),
@@ -71,7 +71,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                         SizedBox(
                           height: context.h * 0.048,
                           width: context.w * 0.8,
-                          child: textFormFIled(
+                          child: textFormFiled(
                             "your_phone".tr(),
                             context.watch<HomeCubit>().phoneNumberController,
                             keyboardType: TextInputType.number,
@@ -83,7 +83,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                             SizedBox(
                               height: context.h * 0.05,
                               width: context.w * 0.5,
-                              child: textFormFIled(
+                              child: textFormFiled(
                                 "your_address".tr(),
                                 context.watch<HomeCubit>().locationController,
                                 keyboardType: TextInputType.streetAddress,

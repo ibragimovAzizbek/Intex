@@ -10,14 +10,17 @@ import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/core/widgets/app_bar.dart';
 import 'package:intex/core/widgets/product_and_ordering.dart';
 import 'package:intex/core/widgets/text_form_filed.dart';
+import 'package:intex/core/widgets/why_chouse_us_base_widget.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
+import 'package:intex/data/model/about_company_model.dart';
 import 'package:intex/extensions/mq_extension.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/widgets/classic_text.dart';
 import '../../core/widgets/drawer.dart';
+import '../../core/widgets/text_button_for_useful_links.dart';
 import '../../data/services/beckend/category_service.dart';
 import '../../data/services/beckend/products_service.dart';
 
@@ -37,16 +40,6 @@ class _HomeViewState extends State<HomeView> {
     canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
       context.read<HomeCubit>().checkCallSupport(result);
     });
-  }
-
-  final ScrollController _controller = ScrollController();
-  final double _height = 100.0;
-  void _animateToIndex(int index) {
-    _controller.animateTo(
-      index * _height,
-      duration: Duration(seconds: 5),
-      curve: Curves.fastOutSlowIn,
-    );
   }
 
   @override
@@ -186,9 +179,9 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         SizedBox(height: context.h * 0.05),
                         Container(
-                          padding: EdgeInsets.only(left: context.w * 0.032),
+                          padding: EdgeInsets.only(left: context.w * 0.035),
                           color: ColorConst.containerBackground,
-                          height: context.h,
+                          height: context.h * 0.8,
                           width: context.w,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +202,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               SizedBox(height: context.h * 0.01),
                               Container(
-                                height: context.h * 0.37,
+                                height: context.h * 0.345,
                                 width: context.w * 0.9,
                                 decoration: BoxDecoration(
                                   color: ColorConst.white,
@@ -219,7 +212,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 child: Padding(
                                   padding:
-                                      EdgeInsets.only(left: context.w * 0.03),
+                                      EdgeInsets.only(left: context.w * 0.032),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -287,14 +280,197 @@ class _HomeViewState extends State<HomeView> {
                                       SizedBox(height: context.h * 0.02),
                                       elevatedButtonBig(
                                           context, "Отправить", () {}),
-                                      SizedBox(height: context.h * 0.02),
                                     ],
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
-                        )
+                        ),
+                        SizedBox(height: context.h * 0.04),
+                        Padding(
+                          padding: EdgeInsets.only(left: context.w * 0.035),
+                          child: classicText("Почему нужно выбрать нас?",
+                              size: FontConst.meduimFont + 2),
+                        ),
+                        SizedBox(height: context.h * 0.04),
+                        WhyChouseUs(
+                          path: 'assets/images/worker.png',
+                          title: "Опыт",
+                          subtitle: "Профессионализм наших сотрудников",
+                        ),
+                        SizedBox(height: context.h * 0.028),
+                        WhyChouseUs(
+                          path: "assets/images/deliverCar.png",
+                          title: "Доставка",
+                          subtitle: "Бесплатная доставка по городу",
+                        ),
+                        SizedBox(height: context.h * 0.028),
+                        WhyChouseUs(
+                          path: "assets/images/intexbassen.png",
+                          title: "Качество",
+                          subtitle: "Прочные, качественные бассейны",
+                        ),
+                        SizedBox(height: context.h * 0.032),
+                        categoryForProducts(
+                          context,
+                          categoryName: "Товары со скидкой",
+                          status: "-17% скидка",
+                          imagePath:
+                              "https://i7.imageban.ru/out/2022/02/01/7873a774e6a8bec056bb64e6412b56f3.jpg",
+                          newPrice: 994651,
+                          oldPrice: 4561648,
+                          poolType: "Каркасный прямоугольный бассейн ",
+                          size: "220х150х60см, 1662л",
+                        ),
+                        SizedBox(height: context.h * 0.035),
+                        Container(
+                          width: context.w,
+                          padding: EdgeInsets.only(left: context.w * 0.035),
+                          color: ColorConst.containerBackground,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: context.h * 0.045),
+                              classicText(
+                                "INTEX-MARKET",
+                                color: ColorConst.accentColor,
+                                size: FontConst.largeFont + 2,
+                              ),
+                              SizedBox(height: context.h * 0.0219),
+                              classicText(
+                                "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи",
+                                color: ColorConst.textColor,
+                                size: FontConst.meduimFont,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              SizedBox(height: context.h * 0.02),
+                              Wrap(
+                                children: [
+                                  iconButton(
+                                    context,
+                                    "assets/icons/facebook.png",
+                                    () {},
+                                  ),
+                                  SizedBox(width: context.w * 0.03),
+                                  iconButton(
+                                    context,
+                                    "assets/icons/in.png",
+                                    () {},
+                                  ),
+                                  SizedBox(width: context.w * 0.03),
+                                  iconButton(
+                                    context,
+                                    "assets/icons/instagram.png",
+                                    () {},
+                                  ),
+                                  SizedBox(width: context.w * 0.03),
+                                  iconButton(
+                                    context,
+                                    "assets/icons/twitter.png",
+                                    () {},
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: context.h * 0.024),
+                              classicText("Полезные ссылки",
+                                  size: FontConst.meduimFont + 2),
+                              SizedBox(height: context.h * 0.016),
+                              TextButtonForLinks(
+                                text: "О Продукт",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Почему мы?",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Контакты",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Категории",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Популярное",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Новинки",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "На скидке",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.016),
+                              classicText("Центр помощи",
+                                  size: FontConst.meduimFont + 2),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Доставка и оплата",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Часто задаваемые вопросы",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.012),
+                              TextButtonForLinks(
+                                text: "Политика конфиденциальности",
+                                function: () {},
+                              ),
+                              SizedBox(height: context.h * 0.016),
+                              classicText("Адрес",
+                                  size: FontConst.meduimFont + 2),
+                              SizedBox(height: context.h * 0.024),
+                              aboutTheCompany(
+                                context,
+                                "assets/icons/li_location.png",
+                                "Улица Пахлавона Махмуда,\nЯшнабадский район, город Ташкент",
+                              ),
+                              SizedBox(height: context.h * 0.01),
+                              aboutTheCompany(
+                                context,
+                                "assets/icons/li_phone.png",
+                                "+998 (90) 128 81 82",
+                              ),
+                              SizedBox(height: context.h * 0.01),
+                              aboutTheCompany(
+                                  context,
+                                  "assets/icons/li_mail.png",
+                                  "Intex@gmail.com"),
+                              SizedBox(height: context.h * 0.01),
+                              aboutTheCompany(
+                                  context,
+                                  "assets/icons/li_clock-9.png",
+                                  "10:00 - 22:00 Без выходных"),
+                              SizedBox(height: context.h * 0.01),
+                              Divider(
+                                thickness: 2,
+                                color: ColorConst.dividerColor,
+                                indent: context.w * 0.02,
+                                endIndent: context.w * 0.03,
+                              ),
+                              SizedBox(height: context.h * 0.016),
+                              classicText(
+                                "INTEX-MARKET © 2022, Разработано в Support Solutions Все права защищены.",
+                                size: FontConst.meduimFont - 2,
+                                color: ColorConst.textColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              SizedBox(height: context.h * 0.02),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -346,6 +522,24 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  Row aboutTheCompany(BuildContext context, String iconPath, String text) {
+    return Row(
+      children: [
+        SizedBox(
+          height: context.h * 0.04,
+          width: context.w * 0.06,
+          child: Image.asset(iconPath),
+        ),
+        SizedBox(width: context.w * 0.02),
+        classicText(
+          text,
+          color: ColorConst.textColor,
+          size: FontConst.meduimFont - 2,
+        )
+      ],
+    );
+  }
+
   Column categoryForProducts(
     BuildContext context, {
     required String categoryName,
@@ -378,7 +572,6 @@ class _HomeViewState extends State<HomeView> {
                     'assets/icons/chevronRight.png',
                     () {
                       // ! Buni to'g'irla bolakay button bosgan scroll bo'lishi kerak
-                      // _animateToIndex(5);
                     },
                   ),
                 ],
@@ -462,299 +655,31 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  IconButton iconButton(
+  InkWell iconButton(
     BuildContext context,
     String path,
     Function function,
   ) {
-    return IconButton(
-      iconSize: context.w * 0.05,
-      icon: Image.asset(
-        path,
-        fit: BoxFit.cover,
+    return InkWell(
+      child: Container(
+        height: context.h * 0.06,
+        width: context.w * 0.13,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: ColorConst.accentColor,
+        ),
+        child: SizedBox(
+          height: context.h * 0.035,
+          child: Image.asset(
+            path,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
-      onPressed: () {
+      onTap: () {
         function();
       },
     );
   }
-
-  /* slivers: [
-                            SliverToBoxAdapter(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: context.h * 0.01),
-                                  classicText(
-                                    "free_sh_pool".tr(),
-                                    size: FontConst.meduimFont + 1,
-                                    color: ColorConst.primaryColor,
-                                  ),
-                                  SizedBox(height: context.h * 0.01),
-                                  Text(
-                                    "we_service".tr(),
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: ColorConst.primaryColor,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(height: context.h * 0.01),
-                                ],
-                              ),
-                            ),
-                            SliverToBoxAdapter(
-                              child: SizedBox(
-                                // height: context.h * 1,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: data[0].length,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, bigIndex) {
-                                    return Column(
-                                      children: [
-                                        SizedBox(height: context.h * 0.03),
-                                        categoryContainer(
-                                          context,
-                                          context.locale.toString() == "uz_UZ"
-                                              ? data[0][bigIndex].categoryNameUz
-                                              : data[0][bigIndex]
-                                                  .categoryNameRu,
-                                        ),
-                                        SizedBox(height: context.h * 0.03),
-                                        ListView.separated(
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          separatorBuilder:
-                                              (context, indexSeprator) =>
-                                                  SizedBox(
-                                            height: context.h * 0.02,
-                                          ),
-                                          itemBuilder: (context, index) =>
-                                              Center(
-                                            child: productAndOrdering(
-                                              context,
-                                              context.locale.toString() ==
-                                                      "uz_UZ"
-                                                  ? context
-                                                      .watch<HomeCubit>()
-                                                      .lstProducts[bigIndex]
-                                                          [bigIndex + 1]![index]
-                                                      .frameUz
-                                                      .toString()
-                                                  : context
-                                                      .watch<HomeCubit>()
-                                                      .lstProducts[bigIndex]
-                                                          [bigIndex + 1]![index]
-                                                      .frameRu
-                                                      .toString(),
-                                              context
-                                                  .watch<HomeCubit>()
-                                                  .lstProducts[bigIndex]
-                                                      [bigIndex + 1]![index]
-                                                  .image
-                                                  .toString(),
-                                              context
-                                                  .watch<HomeCubit>()
-                                                  .lstProducts[bigIndex]
-                                                      [bigIndex + 1]![index]
-                                                  .oldPrice!
-                                                  .toDouble(),
-                                              context
-                                                  .watch<HomeCubit>()
-                                                  .lstProducts[bigIndex]
-                                                      [bigIndex + 1]![index]
-                                                  .newPrice!
-                                                  .toDouble(),
-                                              context.locale.toString() ==
-                                                      "uz_UZ"
-                                                  ? context
-                                                      .watch<HomeCubit>()
-                                                      .lstProducts[bigIndex]
-                                                          [bigIndex + 1]![index]
-                                                      .statusUz
-                                                      .toString()
-                                                  : context
-                                                      .watch<HomeCubit>()
-                                                      .lstProducts[bigIndex]
-                                                          [bigIndex + 1]![index]
-                                                      .statusRu
-                                                      .toString(),
-                                            ),
-                                          ),
-                                          itemCount: context
-                                              .watch<HomeCubit>()
-                                              .lstProducts[bigIndex]
-                                                  [bigIndex + 1]!
-                                              .length,
-
-                                          // ? Bu yerda productga qarab length o'zgarishi kerak
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                            SliverToBoxAdapter(
-                                child: SizedBox(height: context.h * 0.02)),
-                            SliverToBoxAdapter(
-                              child: Container(
-                                height: context.h * 0.58,
-                                width: context.w,
-                                color: ColorConst.primaryColor,
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: context.h * 0.02),
-                                    classicText("git_consultation".tr(),
-                                        color: ColorConst.white),
-                                    Form(
-                                      child: Column(
-                                        children: [
-                                          SizedBox(height: context.h * 0.015),
-                                          SizedBox(
-                                            width: context.w * 0.9,
-                                            height: context.h * 0.048,
-                                            child: textFormFIled(
-                                              "name".tr(),
-                                              context
-                                                  .watch<HomeCubit>()
-                                                  .nameController,
-                                            ),
-                                          ),
-                                          SizedBox(height: context.h * 0.022),
-                                          SizedBox(
-                                            width: context.w * 0.9,
-                                            height: context.h * 0.048,
-                                            child: textFormFIled(
-                                              "phone".tr(),
-                                              context
-                                                  .watch<HomeCubit>()
-                                                  .phoneNumberController,
-                                              keyboardType: TextInputType.phone,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: context.h * 0.02),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        backgroundColor:
-                                            ColorConst.primaryAmber,
-                                      ),
-                                      child: classicText(
-                                        "i_consult".tr(),
-                                        size: FontConst.meduimFont,
-                                      ),
-                                      onPressed: () async {
-                                        checkAlertDiolog(context);
-                                      },
-                                    ),
-                                    SizedBox(height: context.h * 0.02),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Image.asset(
-                                                    'assets/icons/subwayTime.png'),
-                                                SizedBox(
-                                                    width: context.w * 0.02),
-                                                classicText(
-                                                  "working_time".tr(),
-                                                  color: ColorConst.white,
-                                                  size: FontConst.meduimFont,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: context.h * 0.01),
-                                            classicText(
-                                              "${"weekdays".tr()} 10:00 - 22:00\n${"seven_week".tr()}", // ! Database'dan keladi
-                                              color: ColorConst.white,
-                                              size: FontConst.smallFont,
-                                            ),
-                                            SizedBox(height: context.h * 0.01),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                // ? Go to the Phone with Url
-                                                iconButton(
-                                                  context,
-                                                  'assets/icons/phone2.png',
-                                                  () {
-                                                    context
-                                                        .read<HomeCubit>()
-                                                        .callButtonOnTap();
-                                                  },
-                                                ),
-                                                // ? Go to the Telegram with URL
-                                                iconButton(
-                                                  context,
-                                                  'assets/icons/telegram2.png',
-                                                  () {
-                                                    context
-                                                        .read<HomeCubit>()
-                                                        .telegramOnTap();
-                                                  },
-                                                ),
-
-                                                // ? Go to the Instagram with URL
-                                                iconButton(
-                                                  context,
-                                                  'assets/icons/instagram2.png',
-                                                  () {
-                                                    context
-                                                        .read<HomeCubit>()
-                                                        .instagramOnTap();
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            classicText(
-                                              "Intex.uz",
-                                              color: ColorConst.white,
-                                            ),
-                                            SizedBox(height: context.h * 0.01),
-                                            classicText(
-                                              "+998(99)535-53-33",
-                                              color: ColorConst.white,
-                                              size: FontConst.smallFont,
-                                            ),
-                                            SizedBox(height: context.h * 0.01),
-                                            classicText(
-                                              "Мустакиллик,\n59А 100000 Узбекистан,\nТашкент",
-                                              color: ColorConst.white,
-                                              size: FontConst.smallFont,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],*/
 }

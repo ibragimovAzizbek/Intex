@@ -32,4 +32,5 @@ class ColorConst {
   static Color containerBackground = const Color(0xFFF7F9FA);
   static Color skyDarck = const Color(0xFFB4B6B8);
   static Color textformBorderColor = const Color(0xFFE3E5E5);
+  static Color dividerColor = const Color(0xFFF2F2F2);
 }
