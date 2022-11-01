@@ -9,7 +9,7 @@
       <!-- If your app checks for telegram support -->
       <intent>
         <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="tg" />
+        <data android:scheme="facebook" />
       </intent>
       <!-- If your app checks for call support -->
       <intent>
@@ -19,6 +19,14 @@
       <intent>
         <action android:name="android.intent.action.VIEW" />
         <data android:scheme="insta" />
+      </intent>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="in" />
+      </intent>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="twitter" />
       </intent>
     </queries>
 

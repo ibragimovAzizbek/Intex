@@ -9,20 +9,16 @@ import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/core/widgets/app_bar.dart';
 import 'package:intex/core/widgets/product_and_ordering.dart';
-import 'package:intex/core/widgets/text_form_filed.dart';
 import 'package:intex/core/widgets/why_chouse_us_base_widget.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
-import 'package:intex/data/model/about_company_model.dart';
 import 'package:intex/extensions/mq_extension.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/widgets/classic_text.dart';
-import '../../core/widgets/drawer.dart';
+import '../../core/widgets/drawer_widget.dart';
 import '../../core/widgets/text_button_for_useful_links.dart';
-import '../../data/services/beckend/category_service.dart';
-import '../../data/services/beckend/products_service.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -44,10 +40,12 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    print("LANGUAGE: ${context.locale.toString()}");
+
     return Scaffold(
       key: _key,
       backgroundColor: ColorConst.white,
-      drawer: const HomeDrawer(),
+      drawer: HomeDrawer(),
       appBar: HomeAppBar(
         homeContext: context,
         function: () {
@@ -95,13 +93,12 @@ class _HomeViewState extends State<HomeView> {
                                 children: [
                                   SizedBox(
                                     width: context.w * 0.8,
-                                    child: classicText(
-                                        "Бассейны от intex в Ташкенте"),
+                                    child: classicText("poolsInTashkent".tr()),
                                   ),
                                   SizedBox(
                                     width: context.w * 0.8,
                                     child: classicText(
-                                      "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи.",
+                                      "brieflyAboutThePool".tr(),
                                       size: FontConst.largeFont - 2,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -109,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
                                   Image.asset('assets/images/intexbassen.png'),
                                   elevatedButtonBig(
                                     context,
-                                    "Заказать звонок",
+                                    "orderWithCalling".tr(),
                                     () {
                                       context
                                           .read<HomeCubit>()
@@ -142,20 +139,21 @@ class _HomeViewState extends State<HomeView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: context.h * 0.04),
-                              classicText("Бассейны от INTEX в Ташкенте",
+                              classicText("poolsInTashkent".tr(),
                                   size: FontConst.meduimFont + 2),
                               SizedBox(height: context.h * 0.016),
                               classicText(
-                                "Бассейны от intex отличаются обширным перечнем преимуществ, из которых можно выделить самые важные:",
+                                "intexConveniences".tr(),
                                 size: FontConst.meduimFont - 2,
                                 color: ColorConst.textColor,
                               ),
                               SizedBox(height: context.h * 0.05),
-                              ourAmenities(context, "Высокое качество"),
-                              ourAmenities(context, "Прочность"),
-                              ourAmenities(context, "Простота установки"),
-                              ourAmenities(context, "Красивые и ярки цвета"),
-                              ourAmenities(context, "Стильный дизайн"),
+                              ourAmenities(context, "veryQuality".tr()),
+                              ourAmenities(context, "strength".tr()),
+                              ourAmenities(context, "easyToInstall".tr()),
+                              ourAmenities(
+                                  context, "beautifulAndBrightColors".tr()),
+                              ourAmenities(context, "modernDesign".tr()),
                               SizedBox(height: context.h * 0.02),
                               SizedBox(
                                 child:
@@ -187,18 +185,20 @@ class _HomeViewState extends State<HomeView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: context.h * 0.04),
-                              classicText("Купить оптом",
+                              classicText("generalPurchase".tr(),
                                   size: FontConst.meduimFont + 2),
                               SizedBox(height: context.h * 0.02),
                               classicText(
-                                "Если вы хотите купить товары по оптовой цене, вы должны заказать не менее 20 товаров.",
+                                "conditionOfPurchaseAtWholesalePrice".tr(),
                                 size: FontConst.meduimFont - 2,
                               ),
                               SizedBox(height: context.h * 0.024),
                               SizedBox(
                                 width: context.w * 0.85,
-                                child: Image.asset(
-                                    'assets/images/karkasniybaseyn.png'),
+                                child: Center(
+                                  child: Image.asset(
+                                      'assets/images/karkasniybaseyn.png'),
+                                ),
                               ),
                               SizedBox(height: context.h * 0.01),
                               Container(
@@ -218,7 +218,7 @@ class _HomeViewState extends State<HomeView> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(height: context.h * 0.02),
-                                      classicText("Имя",
+                                      classicText("name".tr(),
                                           size: FontConst.meduimFont),
                                       SizedBox(height: context.h * 0.02),
                                       SizedBox(
@@ -226,7 +226,7 @@ class _HomeViewState extends State<HomeView> {
                                         height: context.h * 0.06,
                                         child: TextFormField(
                                           decoration: InputDecoration(
-                                            hintText: 'Введите ваше имя',
+                                            hintText: "inputFiledName".tr(),
                                             hintStyle: TextStyle(
                                                 color: ColorConst.skyDarck),
                                             border: OutlineInputBorder(
@@ -240,7 +240,7 @@ class _HomeViewState extends State<HomeView> {
                                         ),
                                       ),
                                       SizedBox(height: context.h * 0.02),
-                                      classicText("Номер телефона",
+                                      classicText("phoneNumber".tr(),
                                           size: FontConst.meduimFont),
                                       SizedBox(height: context.h * 0.02),
                                       Container(
@@ -279,7 +279,7 @@ class _HomeViewState extends State<HomeView> {
                                       ),
                                       SizedBox(height: context.h * 0.02),
                                       elevatedButtonBig(
-                                          context, "Отправить", () {}),
+                                          context, "send".tr(), () {}),
                                     ],
                                   ),
                                 ),
@@ -290,26 +290,26 @@ class _HomeViewState extends State<HomeView> {
                         SizedBox(height: context.h * 0.04),
                         Padding(
                           padding: EdgeInsets.only(left: context.w * 0.035),
-                          child: classicText("Почему нужно выбрать нас?",
+                          child: classicText("whyChooseUs".tr(),
                               size: FontConst.meduimFont + 2),
                         ),
                         SizedBox(height: context.h * 0.04),
                         WhyChouseUs(
                           path: 'assets/images/worker.png',
-                          title: "Опыт",
-                          subtitle: "Профессионализм наших сотрудников",
+                          title: "experience".tr(),
+                          subtitle: "experienceSubtitle".tr(),
                         ),
                         SizedBox(height: context.h * 0.028),
                         WhyChouseUs(
                           path: "assets/images/deliverCar.png",
-                          title: "Доставка",
-                          subtitle: "Бесплатная доставка по городу",
+                          title: "delivery".tr(),
+                          subtitle: "deliverySubtitle".tr(),
                         ),
                         SizedBox(height: context.h * 0.028),
                         WhyChouseUs(
                           path: "assets/images/intexbassen.png",
-                          title: "Качество",
-                          subtitle: "Прочные, качественные бассейны",
+                          title: "quality".tr(),
+                          subtitle: "qualitySubtitle".tr(),
                         ),
                         SizedBox(height: context.h * 0.032),
                         categoryForProducts(
@@ -339,7 +339,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               SizedBox(height: context.h * 0.0219),
                               classicText(
-                                "Бассейны от intex - доступная по цене, качественная, надежная и экологически чистая продукция, которая предназначена для приятного отдыха всей семьи",
+                                "swimmingPoolsFromIntex".tr(),
                                 color: ColorConst.textColor,
                                 size: FontConst.meduimFont,
                                 fontWeight: FontWeight.w600,
@@ -377,7 +377,7 @@ class _HomeViewState extends State<HomeView> {
                                 ],
                               ),
                               SizedBox(height: context.h * 0.024),
-                              classicText("Полезные ссылки",
+                              classicText("usefulLinks".tr(),
                                   size: FontConst.meduimFont + 2),
                               SizedBox(height: context.h * 0.016),
                               TextButtonForLinks(
@@ -415,7 +415,7 @@ class _HomeViewState extends State<HomeView> {
                                 function: () {},
                               ),
                               SizedBox(height: context.h * 0.016),
-                              classicText("Центр помощи",
+                              classicText("helpCenter".tr(),
                                   size: FontConst.meduimFont + 2),
                               SizedBox(height: context.h * 0.012),
                               TextButtonForLinks(
@@ -433,7 +433,7 @@ class _HomeViewState extends State<HomeView> {
                                 function: () {},
                               ),
                               SizedBox(height: context.h * 0.016),
-                              classicText("Адрес",
+                              classicText("address".tr(),
                                   size: FontConst.meduimFont + 2),
                               SizedBox(height: context.h * 0.024),
                               aboutTheCompany(
@@ -466,7 +466,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               SizedBox(height: context.h * 0.016),
                               classicText(
-                                "INTEX-MARKET © 2022, Разработано в Support Solutions Все права защищены.",
+                                "developer".tr(),
                                 size: FontConst.meduimFont - 2,
                                 color: ColorConst.textColor,
                                 fontWeight: FontWeight.w500,
@@ -560,36 +560,15 @@ class _HomeViewState extends State<HomeView> {
         Padding(
           padding:
               EdgeInsets.only(left: context.w * 0.05, right: context.w * 0.02),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              classicText(categoryName, size: FontConst.largeFont + 2),
-              Wrap(
-                children: [
-                  chevronRightAndLeftButton(
-                    context,
-                    'assets/icons/chevronLeft.png',
-                    () {},
-                  ),
-                  chevronRightAndLeftButton(
-                    context,
-                    'assets/icons/chevronRight.png',
-                    () {
-                      // ! Buni to'g'irla bolakay button bosgan scroll bo'lishi kerak
-                    },
-                  ),
-                ],
-              )
-            ],
-          ),
+          child: classicText(categoryName, size: FontConst.largeFont + 2),
         ),
+        SizedBox(height: context.h * 0.029),
         Container(
           color: ColorConst.containerBackground,
-          height: context.h * 0.48,
+          height: context.h * 0.5,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              // superIndex = index;
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,

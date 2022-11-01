@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:intex/core/widgets/classic_text.dart';
 
@@ -7,8 +8,8 @@ import '../constants/font_const.dart';
 class TextButtonForLinks extends StatelessWidget {
   String text;
   Function function;
-  TextButtonForLinks(
-      {Key? key, required this.text, required this.function})
+
+  TextButtonForLinks({Key? key, required this.text, required this.function})
       : super(key: key);
 
   @override

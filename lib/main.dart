@@ -8,7 +8,6 @@ import 'package:intex/routes/routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  // await GetAbountCompany.inherentce.getCategory();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -17,6 +16,7 @@ void main() async {
       child: EasyLocalization(supportedLocales: const [
         Locale('ru', 'RU'),
         Locale('uz', 'UZ'),
+        Locale('en', 'US'),
       ], path: 'assets/lang', child: const MyApp()),
     ),
   );

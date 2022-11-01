@@ -1,5 +1,8 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
+import 'dart:developer';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
   TextEditingController phoneNumberController =
       TextEditingController(text: "+998 ");
   TextEditingController locationController = TextEditingController();
-   String initialCountry = 'UZ';
+  String initialCountry = 'UZ';
   PhoneNumber number = PhoneNumber(isoCode: 'UZ');
 
   var location;
@@ -30,6 +33,18 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void>? launched;
   String phone = '+998994294143';
   String path = 'https://t.me/ibragimov_azizbekk';
+
+  changeLanguage(BuildContext context, String countryCode) async {
+    log("countryCode  ${countryCode}");
+    await context.setLocale(
+      countryCode == "Ru"
+          ? const Locale('ru', 'RU')
+          : countryCode == "Uz"
+              ? const Locale('uz', 'UZ')
+              : const Locale('en', 'US'),
+    );
+    emit(HomeInitial());
+  }
 
   changeInitialState() {
     emit(HomeInitial());

@@ -23,6 +23,7 @@ Stack productAndOrdering(
         padding: EdgeInsets.only(left: context.w * 0.021),
         child: Container(
           width: context.w * 0.7,
+          height: context.h * 0.49,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: ColorConst.white,
@@ -72,7 +73,7 @@ Stack productAndOrdering(
                 ),
               ),
               SizedBox(height: context.h * 0.017),
-              Center(child: elevatedButtonMeduim(context, "Заказать", () {}))
+              Center(child: elevatedButtonMeduim(context, "order".tr(), () {}))
             ],
           ),
         ),
@@ -87,7 +88,9 @@ Stack productAndOrdering(
           decoration: BoxDecoration(
             color: status == "Хит продаж"
                 ? ColorConst.statusPopular
-                : ColorConst.statusNew,
+                : status == "Новинки"
+                    ? ColorConst.statusNew
+                    : ColorConst.statusDiscount,
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(8),
               bottomRight: Radius.circular(8),
