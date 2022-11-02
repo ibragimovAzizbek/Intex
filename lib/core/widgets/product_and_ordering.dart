@@ -20,10 +20,11 @@ Stack productAndOrdering(
   return Stack(
     children: [
       Padding(
-        padding: EdgeInsets.only(left: context.w * 0.021),
+        padding:
+            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.021),
         child: Container(
-          width: context.w * 0.7,
-          height: context.h * 0.49,
+          width: MediaQuery.of(context).size.width * 0.7,
+          height: MediaQuery.of(context).size.height * 0.49,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: ColorConst.white,
@@ -31,39 +32,43 @@ Stack productAndOrdering(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: context.h * 0.05),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Center(
                 child: SizedBox(
-                  height: context.h * 0.16,
-                  width: context.w * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.16,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   child: CachedNetworkImage(imageUrl: imagePath),
                 ),
               ),
-              SizedBox(height: context.h * 0.02),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Divider(thickness: 3, color: ColorConst.containerBackground),
-              SizedBox(height: context.h * 0.01),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               Padding(
-                padding: EdgeInsets.only(left: context.w * 0.035),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.035),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: context.w * 0.8,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       child: classicText(text, size: FontConst.meduimFont),
                     ),
-                    SizedBox(height: context.h * 0.013),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.013),
                     classicText(sizeSwimmingPool,
                         color: ColorConst.textColor,
                         fontWeight: FontWeight.normal,
                         size: FontConst.meduimFont - 2),
-                    SizedBox(height: context.h * 0.013),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.013),
                     classicText(
                       "$originalPrice  ${"currency_name".tr()}",
                       decoration: TextDecoration.lineThrough,
                       color: ColorConst.salePriceColor,
                       size: FontConst.smallFont,
                     ),
-                    SizedBox(height: context.h * 0.005),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.005),
                     classicText(
                       "$discountPrice ${"currency_name".tr()}",
                       color: ColorConst.accentColor,
@@ -72,7 +77,7 @@ Stack productAndOrdering(
                   ],
                 ),
               ),
-              SizedBox(height: context.h * 0.017),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.017),
               Center(child: elevatedButtonMeduim(context, "order".tr(), () {}))
             ],
           ),
@@ -83,8 +88,8 @@ Stack productAndOrdering(
         left: 9,
         child: Container(
           alignment: Alignment.center,
-          height: context.h * 0.037,
-          width: context.w * 0.28,
+          height: MediaQuery.of(context).size.height * 0.037,
+          width: MediaQuery.of(context).size.width * 0.28,
           decoration: BoxDecoration(
             color: status == "Хит продаж"
                 ? ColorConst.statusPopular

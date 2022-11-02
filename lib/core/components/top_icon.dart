@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intex/extensions/mq_extension.dart';
 
 IconButton topIconButton(
   BuildContext context,
@@ -8,7 +7,7 @@ IconButton topIconButton(
 ) {
   return IconButton(
     icon: SizedBox(
-      width: context.w * 0.2,
+      width: MediaQuery.of(context).size.width * 0.25,
       child: Image.asset(
         path,
         fit: BoxFit.cover,

@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intex/core/constants/font_const.dart';
 import 'package:intex/core/widgets/classic_text.dart';
-import 'package:intex/extensions/mq_extension.dart';
 import 'package:lottie/lottie.dart';
 
 import '../constants/color_const.dart';
@@ -18,14 +17,15 @@ checkAlertDiolog(BuildContext context) => showDialog(
             Navigator.pop(context);
           },
         ),
-        iconPadding: EdgeInsets.only(left: context.w * 0.7),
+        iconPadding:
+            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.7),
         title: LottieBuilder.asset('assets/anim/checkAnimation.json'),
         content: SizedBox(
-          height: context.h * 0.15,
+          height: MediaQuery.of(context).size.height * 0.15,
           child: Column(
             children: [
               classicText("thank".tr(), size: 40),
-              SizedBox(height: context.h * 0.02),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Text(
                 "your_time".tr(),
                 style: TextStyle(

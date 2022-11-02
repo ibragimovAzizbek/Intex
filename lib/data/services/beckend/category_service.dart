@@ -15,7 +15,7 @@ class CategoryService {
   Future<List<CategoryModel>> getCatrgory() async {
     Response res = await Dio().get("${BaseApi.baseApi}category");
 
-    print("STATUS CODE: CATEGORY");
+    // print("STATUS CODE: CATEGORY");
 
     if (res.statusCode == 200) {
       categoryLength = (res.data as List).length;

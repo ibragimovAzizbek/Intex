@@ -13,16 +13,16 @@ class GetAbountCompany {
   Future<List<AboutCompanyModel>> getCategory() async {
     Response res = await Dio().get("${BaseApi.baseApi}site");
 
-    print("DATA ABOUT: Service");
+    // print("DATA ABOUT: Service");
 
     if (res.statusCode == 200) {
       try {
-        print("ABOUT THE COMPANY || try");
+        // print("ABOUT THE COMPANY || try");
         return (res.data as List)
             .map((e) => AboutCompanyModel.fromJson(e))
             .toList();
       } catch (e) {
-        print("ABOUT THE COMPANY || catch");
+        // print("ABOUT THE COMPANY || catch");
         throw Exception("ERROR $e");
       }
     } else if (res.data == 404) {

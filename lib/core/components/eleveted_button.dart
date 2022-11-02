@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intex/core/constants/font_const.dart';
-import 'package:intex/extensions/mq_extension.dart';
 
 import '../constants/color_const.dart';
 import '../widgets/classic_text.dart';
@@ -12,7 +11,8 @@ ElevatedButton elevatedButtonBig(
 ) =>
     ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(context.w * 0.83, context.h * 0.065),
+        fixedSize: Size(MediaQuery.of(context).size.width * 0.83,
+            MediaQuery.of(context).size.height * 0.065),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -36,7 +36,8 @@ ElevatedButton elevatedButtonMeduim(
 ) =>
     ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(context.w * 0.6, context.h * 0.065),
+        fixedSize: Size(MediaQuery.of(context).size.width * 0.6,
+            MediaQuery.of(context).size.height * 0.065),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

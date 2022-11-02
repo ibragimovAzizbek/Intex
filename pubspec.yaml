@@ -48,6 +48,7 @@ dependencies:
   easy_localization: ^3.0.1
   cached_network_image: ^3.2.2
   intl_phone_number_input: ^0.7.1
+  device_preview: ^1.1.0
   
 dev_dependencies:
   flutter_test:

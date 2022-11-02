@@ -20,7 +20,8 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                 Navigator.pop(context);
               },
             ),
-            iconPadding: EdgeInsets.only(left: context.w * 0.7),
+            iconPadding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.7),
             backgroundColor: ColorConst.backgroundColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -29,8 +30,8 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    width: context.w * 0.8,
-                    height: context.h * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.2,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(35),
@@ -49,40 +50,42 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                       ],
                     ),
                   ),
-                  SizedBox(height: context.h * 0.02),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Center(
                     child: classicText(
                       '1.390.000 ${"currency_name".tr()}',
                     ), // ! MASULAT NARXI BECK-END'dan keladi
                   ),
-                  SizedBox(height: context.h * 0.01),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Form(
                     child: Column(
                       children: [
                         SizedBox(
-                          height: context.h * 0.048,
-                          width: context.w * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.048,
+                          width: MediaQuery.of(context).size.width * 0.8,
                           child: textFormFiled(
                             "your_name".tr(),
                             context.watch<HomeCubit>().nameController,
                           ),
                         ),
-                        SizedBox(height: context.h * 0.01),
                         SizedBox(
-                          height: context.h * 0.048,
-                          width: context.w * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.048,
+                          width: MediaQuery.of(context).size.width * 0.8,
                           child: textFormFiled(
                             "your_phone".tr(),
                             context.watch<HomeCubit>().phoneNumberController,
                             keyboardType: TextInputType.number,
                           ),
                         ),
-                        SizedBox(height: context.h * 0.01),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
                         Row(
                           children: [
                             SizedBox(
-                              height: context.h * 0.05,
-                              width: context.w * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.width * 0.5,
                               child: textFormFiled(
                                 "your_address".tr(),
                                 context.watch<HomeCubit>().locationController,
@@ -90,14 +93,17 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                               ),
                             ),
                             IconButton(
-                              iconSize: context.w * 0.15,
+                              iconSize:
+                                  MediaQuery.of(context).size.width * 0.15,
                               icon: SizedBox(
-                                height: context.h * 0.043,
-                                width: context.w * 0.4,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.043,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 child: Image.asset(
                                   'assets/icons/location.png',
                                   fit: BoxFit.cover,
-                                  width: context.w * 0.2,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
                                 ),
                               ),
                               onPressed: () async {
@@ -105,7 +111,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                                 // showDialog(
                                 //   context: context,
                                 //   builder: (context) => SizedBox(
-                                //     height: context.h * 0.005,
+                                //     height: MediaQuery.of(context).size.height * 0.005,
                                 //     child: const AlertDialog(
                                 //       content: Center(
                                 //         child: CircularProgressIndicator

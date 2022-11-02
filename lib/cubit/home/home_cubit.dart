@@ -1,7 +1,5 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -35,7 +33,6 @@ class HomeCubit extends Cubit<HomeState> {
   String path = 'https://t.me/ibragimov_azizbekk';
 
   changeLanguage(BuildContext context, String countryCode) async {
-    log("countryCode  ${countryCode}");
     await context.setLocale(
       countryCode == "Ru"
           ? const Locale('ru', 'RU')

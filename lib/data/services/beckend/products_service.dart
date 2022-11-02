@@ -13,7 +13,7 @@ class ProductService {
   Future<List<ProductsModel>> getProducts() async {
     Response res = await Dio().get("${BaseApi.baseApi}product/getAll");
 
-    print("STATUS CODE: Products");
+    // print("STATUS CODE: Products");
 
     if (res.statusCode == 200) {
       try {
