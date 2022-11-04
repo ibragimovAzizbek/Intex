@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intex/core/constants/font_const.dart';
+import 'package:intex/core/func/show_diolog_order_product.dart';
 
 import '../constants/color_const.dart';
 import '../widgets/classic_text.dart';
@@ -49,7 +50,7 @@ ElevatedButton elevatedButtonMeduim(
         size: FontConst.meduimFont + 2,
         fontWeight: FontWeight.w700,
       ),
-      onPressed: () async {
-        await function();
+      onPressed: () {
+        alertDiologOrderAProduct(context, "Ваш заказ");
       },
     );

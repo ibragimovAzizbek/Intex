@@ -8,12 +8,12 @@ class CategoryDataView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar(
-        homeContext: context,
-        function: () {
-          _key.currentState!.openDrawer();
-        },
-      ),
+      // appBar: HomeAppBar(
+      //   homeContext: context,
+      //   function: () {
+      //     _key.currentState!.openDrawer();
+      //   },
+      // ),
     );
   }
 }

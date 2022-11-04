@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intex/core/widgets/classic_text.dart';
 

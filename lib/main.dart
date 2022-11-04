@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
@@ -22,8 +23,7 @@ void main() async {
           ],
           path: 'assets/lang',
           child: DevicePreview(
-            enabled: true,
-            builder: (context) => const MyApp())),
+              enabled: true, builder: (context) => const MyApp())),
     ),
   );
 }
@@ -33,6 +33,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: ColorConst.baseColor,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

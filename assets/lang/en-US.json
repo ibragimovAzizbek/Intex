@@ -27,5 +27,8 @@
     "address" : "Address",
     "developer" : "INTEX-MARKET © 2022, Developed by Support Solutions All rights reserved.",
     "currency_name" : "so'm",
-    "inputFiledName" : "Enter your name"
+    "inputFiledName" : "Enter your name",
+    "congratulations" : "Congratulations",
+    "congratulationsSubtitle" : "Congratulations, your order has been accepted. We will contact you shortly",
+    "ok" : "Ok"
   }

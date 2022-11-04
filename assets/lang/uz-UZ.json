@@ -27,5 +27,8 @@
   "address" : "Manzil",
   "developer" : "INTEX-MARKET © 2022, Support Solutions tomonidan ishlab chiqilgan Barcha huquqlar himoyalangan.",
   "currency_name" : "so'm",
-  "inputFiledName" : "Ismingizni kiriting"
+  "inputFiledName" : "Ismingizni kiriting",
+  "congratulations" : "Tabriklaymiz",
+  "congratulationsSubtitle" : "Tabriklaymiz, buyurtmangiz qabul qilindi. Tez orada siz bilan bog'lanamiz",
+  "ok" : "Оk"
 }

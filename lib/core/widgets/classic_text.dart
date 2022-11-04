@@ -9,9 +9,10 @@ Text classicText(String text,
   return Text(
     text,
     style: TextStyle(
-        fontSize: size,
-        color: color,
-        fontWeight: fontWeight,
-        decoration: decoration),
+      fontSize: size,
+      color: color,
+      fontWeight: fontWeight,
+      decoration: decoration,
+    ),
   );
 }

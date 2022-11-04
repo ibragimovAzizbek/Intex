@@ -27,5 +27,8 @@
   "address" : "Адрес",
   "developer" : "INTEX-MARKET © 2022, Разработано в Support Solutions Все права защищены.",
   "currency_name" : "сум",
-  "inputFiledName" : "Введите ваше имя"
+  "inputFiledName" : "Введите ваше имя",
+  "congratulations" : "Поздравляем",
+  "congratulationsSubtitle" : "Поздравляем, ваш заказ принят. Мы свяжемся с вами в ближайшее время",
+  "ok" : "Ок"
 }
