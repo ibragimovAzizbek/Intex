@@ -30,5 +30,8 @@
   "inputFiledName" : "Введите ваше имя",
   "congratulations" : "Поздравляем",
   "congratulationsSubtitle" : "Поздравляем, ваш заказ принят. Мы свяжемся с вами в ближайшее время",
-  "ok" : "Ок"
+  "ok" : "Ок",
+  "your_order" : "Ваш заказ",
+  "total_amount" : "Общая сумма:",
+  "input_address" : "Введите ваш адрес"
 }

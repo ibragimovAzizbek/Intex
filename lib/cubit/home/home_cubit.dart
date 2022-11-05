@@ -15,12 +15,15 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
+  late ScrollController scrollCtx = ScrollController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController =
       TextEditingController(text: "+998 ");
   TextEditingController locationController = TextEditingController();
   String initialCountry = 'UZ';
   PhoneNumber number = PhoneNumber(isoCode: 'UZ');
+  int howManyProducts = 0;
+  double totalAmount = 0;
 
   var location;
   var address;
@@ -32,6 +35,14 @@ class HomeCubit extends Cubit<HomeState> {
   String phone = '+998994294143';
   String path = 'https://t.me/ibragimov_azizbekk';
 
+  void scrollWidgets(double pixsel) {
+    scrollCtx.animateTo(
+      pixsel,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+    );
+  }
+
   changeLanguage(BuildContext context, String countryCode) async {
     await context.setLocale(
       countryCode == "Ru"
@@ -40,6 +51,21 @@ class HomeCubit extends Cubit<HomeState> {
               ? const Locale('uz', 'UZ')
               : const Locale('en', 'US'),
     );
+    emit(HomeInitial());
+  }
+
+  countTotalAmount(double price) {
+    totalAmount = price * howManyProducts;
+    emit(HomeInitial());
+  }
+
+  incrementProduct() {
+    howManyProducts++;
+    emit(HomeInitial());
+  }
+
+  reduceProduct() {
+    howManyProducts != 0 ? howManyProducts-- : howManyProducts = 0;
     emit(HomeInitial());
   }
 

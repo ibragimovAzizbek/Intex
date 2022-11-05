@@ -30,5 +30,8 @@
   "inputFiledName" : "Ismingizni kiriting",
   "congratulations" : "Tabriklaymiz",
   "congratulationsSubtitle" : "Tabriklaymiz, buyurtmangiz qabul qilindi. Tez orada siz bilan bog'lanamiz",
-  "ok" : "Оk"
+  "ok" : "Оk",
+  "your_order" : "Sizning buyurtmangiz",
+  "total_amount" : "Umumiy narx:",
+  "input_address" : "Manzilingizni kiriting"
 }

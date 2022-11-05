@@ -1,10 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/func/show_diolog_congratulations.dart';
 
 import '../../cubit/home/home_cubit.dart';
-import '../components/eleveted_button.dart';
 import '../components/top_icon.dart';
 import '../constants/color_const.dart';
 import '../constants/font_const.dart';
@@ -51,49 +49,38 @@ class HomeAppBarTwo extends StatelessWidget {
       floating: false,
       elevation: 0,
       automaticallyImplyLeading: false,
-      expandedHeight: MediaQuery.of(context).size.height * 0.1,
-      flexibleSpace: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.068,
-            width: MediaQuery.of(context).size.width * 0.13,
-            child: topIconButton(
-              context,
-              'assets/icons/menudrawer.png',
-              () {
-                function();
-              },
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: TextField(
-              cursorColor: ColorConst.accentColor,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: ColorConst.white,
-                prefixIcon: Image.asset('assets/icons/meduimSearch.png'),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(6),
-                ),
+      expandedHeight: MediaQuery.of(context).size.height * 0.075,
+      leading: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.068,
+        width: MediaQuery.of(context).size.width * 0.13,
+        child: topIconButton(
+          context,
+          'assets/icons/menudrawer.png',
+          () {
+            function();
+          },
+        ),
+      ),
+      title: Padding(
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.012),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.76,
+          height: MediaQuery.of(context).size.height * 0.07,
+          child: TextField(
+            cursorColor: ColorConst.accentColor,
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: ColorConst.white,
+              prefixIcon: Image.asset('assets/icons/meduimSearch.png'),
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.09,
-            width: MediaQuery.of(context).size.width * 0.17,
-            child: topIconButton(
-              context,
-              'assets/icons/cart.png',
-              () {
-                congratulationsDiolog(context);
-              },
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

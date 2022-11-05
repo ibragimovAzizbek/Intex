@@ -10,12 +10,11 @@ import 'package:intex/core/widgets/product_and_ordering.dart';
 import 'package:intex/core/widgets/why_chouse_us_base_widget.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/cubit/home/home_state.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/widgets/classic_text.dart';
 import '../../core/widgets/drawer_widget.dart';
-import '../../core/widgets/text_button_for_useful_links.dart';
+import '../../core/widgets/input_filed_name_phone_number.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -26,15 +25,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-  late ScrollController controller;
-
-  void scrollWidgets(double pixsel) {
-    controller.animateTo(
-      pixsel,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeIn,
-    );
-  }
 
   @override
   void initState() {
@@ -42,13 +32,12 @@ class _HomeViewState extends State<HomeView> {
     canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
       context.read<HomeCubit>().checkCallSupport(result);
     });
-    controller = ScrollController();
   }
 
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
+    context.watch<HomeCubit>().scrollCtx.dispose();
   }
 
   @override
@@ -77,7 +66,7 @@ class _HomeViewState extends State<HomeView> {
               } else if (state is HomeInitial) {
                 return SafeArea(
                   child: CustomScrollView(
-                    controller: controller,
+                    controller: context.watch<HomeCubit>().scrollCtx,
                     slivers: [
                       const HomeAppBarOne(),
                       SliverToBoxAdapter(
@@ -320,121 +309,21 @@ class _HomeViewState extends State<HomeView> {
                                             12,
                                           ),
                                         ),
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.032),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.02),
-                                              classicText("name".tr(),
-                                                  size: FontConst.meduimFont),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.02),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
+                                        child: Column(
+                                          children: [
+                                            NameAndPhonenumberInputFiled(
+                                                width: 0.8),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.8,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.06,
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        "inputFiledName".tr(),
-                                                    hintStyle: TextStyle(
-                                                        color: ColorConst
-                                                            .skyDarck),
-                                                    border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: ColorConst
-                                                              .textformBorderColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                    ),
-                                                  ),
-                                                ),
+                                                    0.037,
                                               ),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.02),
-                                              classicText("phoneNumber".tr(),
-                                                  size: FontConst.meduimFont),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.02),
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.8,
-                                                alignment: Alignment.center,
-                                                padding: const EdgeInsets.only(
-                                                    left: 12),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: const Color(
-                                                          0xFFCBCBCB),
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    color: ColorConst.white),
-                                                child:
-                                                    InternationalPhoneNumberInput(
-                                                  onInputChanged:
-                                                      (PhoneNumber number) {
-                                                    // print(number.phoneNumber);
-                                                  },
-                                                  cursorColor: ColorConst.black,
-                                                  // selectorConfig: const SelectorConfig(
-                                                  //   selectorType:
-                                                  //       PhoneInputSelectorType.DIALOG,
-                                                  // ),
-                                                  inputDecoration:
-                                                      InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 15,
-                                                            left: 0),
-                                                    border: InputBorder.none,
-                                                    hintText: "(90) 123 45 67",
-                                                    hintStyle: TextStyle(
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                      fontSize:
-                                                          FontConst.meduimFont,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.02),
-                                              elevatedButtonBig(
+                                              child: elevatedButtonBig(
                                                   context, "send".tr(), () {}),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -511,19 +400,10 @@ class _HomeViewState extends State<HomeView> {
                                       size: FontConst.largeFont + 2,
                                     ),
                                     SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.0219),
-                                    classicText(
-                                      "swimmingPoolsFromIntex".tr(),
-                                      color: ColorConst.textColor,
-                                      size: FontConst.meduimFont,
-                                      fontWeight: FontWeight.w600,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.0219,
                                     ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.02),
                                     Wrap(
                                       children: [
                                         iconButton(
@@ -571,114 +451,114 @@ class _HomeViewState extends State<HomeView> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.024),
-                                    classicText("usefulLinks".tr(),
-                                        size: FontConst.meduimFont + 2),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.016),
-                                    TextButtonForLinks(
-                                      text: "О Продукт",
-                                      function: () {
-                                        scrollWidgets(0.0);
-                                      },
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Почему мы?",
-                                      function: () {
-                                        scrollWidgets(2980);
-                                      },
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Контакты",
-                                      function: () {
-                                        context
-                                            .read<HomeCubit>()
-                                            .callButtonOnTap();
-                                      },
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Категории",
-                                      function: () {},
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Популярное",
-                                      function: () {
-                                        scrollWidgets(620.7);
-                                      },
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Новинки",
-                                      function: () {
-                                        scrollWidgets(1603.5);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.012,
-                                    ),
-                                    TextButtonForLinks(
-                                      text: "На скидке",
-                                      function: () {
-                                        scrollWidgets(3764.8);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.016,
-                                    ),
-                                    classicText("helpCenter".tr(),
-                                        size: FontConst.meduimFont + 2),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Доставка и оплата",
-                                      function: () {},
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Часто задаваемые вопросы",
-                                      function: () {},
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.012),
-                                    TextButtonForLinks(
-                                      text: "Политика конфиденциальности",
-                                      function: () {},
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.016),
+                                    //! classicText("usefulLinks".tr(),
+                                    //     size: FontConst.meduimFont + 2),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.016),
+                                    // TextButtonForLinks(
+                                    //   text: "О Продукт",
+                                    //   function: () {
+                                    //     scrollWidgets(0.0);
+                                    //   },
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Почему мы?",
+                                    //   function: () {
+                                    //     scrollWidgets(2980);
+                                    //   },
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Контакты",
+                                    //   function: () {
+                                    //     context
+                                    //         .read<HomeCubit>()
+                                    //         .callButtonOnTap();
+                                    //   },
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Категории",
+                                    //   function: () {},
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Популярное",
+                                    //   function: () {
+                                    //     scrollWidgets(620.7);
+                                    //   },
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Новинки",
+                                    //   function: () {
+                                    //     scrollWidgets(1603.5);
+                                    //   },
+                                    // ),
+                                    // SizedBox(
+                                    //   height:
+                                    //       MediaQuery.of(context).size.height *
+                                    //           0.012,
+                                    // ),
+                                    // TextButtonForLinks(
+                                    //   text: "На скидке",
+                                    //   function: () {
+                                    //     scrollWidgets(3764.8);
+                                    //   },
+                                    // ),
+                                    // SizedBox(
+                                    //   height:
+                                    //       MediaQuery.of(context).size.height *
+                                    //           0.016,
+                                    // ),
+                                    // classicText("helpCenter".tr(),
+                                    //     size: FontConst.meduimFont + 2),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Доставка и оплата",
+                                    //   function: () {},
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Часто задаваемые вопросы",
+                                    //   function: () {},
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.012),
+                                    // TextButtonForLinks(
+                                    //   text: "Политика конфиденциальности",
+                                    //   function: () {},
+                                    // ),
+                                    // SizedBox(
+                                    //     height:
+                                    //         MediaQuery.of(context).size.height *
+                                    //             0.016),
                                     classicText("address".tr(),
                                         size: FontConst.meduimFont + 2),
                                     SizedBox(
@@ -838,8 +718,7 @@ class _HomeViewState extends State<HomeView> {
           child: classicText(categoryName, size: FontConst.largeFont + 2),
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.029),
-        Container(
-          color: ColorConst.containerBackground,
+        SizedBox(
           height: MediaQuery.of(context).size.height * 0.5,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,

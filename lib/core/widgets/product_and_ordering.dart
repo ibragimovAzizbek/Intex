@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intex/core/components/eleveted_button.dart';
 import 'package:intex/core/widgets/classic_text.dart';
-import 'package:intex/extensions/mq_extension.dart';
 
 import '../constants/color_const.dart';
 import '../constants/font_const.dart';
@@ -26,9 +25,16 @@ Stack productAndOrdering(
           width: MediaQuery.of(context).size.width * 0.7,
           height: MediaQuery.of(context).size.height * 0.49,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: ColorConst.white,
-          ),
+              borderRadius: BorderRadius.circular(12),
+              color: ColorConst.white,
+              boxShadow: [
+                BoxShadow(
+                  color: ColorConst.shodowColor.withOpacity(0.5),
+                  spreadRadius: 10,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

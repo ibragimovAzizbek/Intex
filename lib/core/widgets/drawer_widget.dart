@@ -82,30 +82,75 @@ class HomeDrawer extends StatelessWidget {
                 title: classicText("Категории",
                     size: FontConst.meduimFont, color: ColorConst.textColor),
                 children: [
-                  TextButtonForUrls(text: "Надувные бассейны", function: () {}),
+                  TextButtonForUrls(
+                    text: "Надувные бассейны",
+                    function: () {},
+                    size: FontConst.meduimFont - 2,
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   TextButtonForUrls(
-                      text: "Каркасные бассейны", function: () {}),
+                    text: "Каркасные бассейны",
+                    function: () {},
+                    size: FontConst.meduimFont - 2,
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  // TextButtonForUrls(
+                  //     text: "Все чистки бассейна", function: () {}),
+                  // SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   TextButtonForUrls(
-                      text: "Все чистки бассейна", function: () {}),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  TextButtonForUrls(
-                      text: "Аксессуары для бассейна", function: () {}),
+                    text: "Аксессуары для бассейна",
+                    function: () {},
+                    size: FontConst.meduimFont - 2,
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 ],
               ),
-              TextButtonForUrls(text: "Популярное", function: () {}),
+              TextButtonForUrls(
+                text: "Популярное",
+                function: () {
+                  Navigator.pop(context);
+                  context.read<HomeCubit>().scrollWidgets(600.7);
+                },
+              ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextButtonForUrls(text: "Новинки", function: () {}),
+              TextButtonForUrls(
+                text: "Новинки",
+                function: () {
+                  Navigator.pop(context);
+                  context.read<HomeCubit>().scrollWidgets(1603.5);
+                },
+              ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextButtonForUrls(text: "На скидке", function: () {}),
+              TextButtonForUrls(
+                text: "На скидке",
+                function: () {
+                  Navigator.pop(context);
+                  context.read<HomeCubit>().scrollWidgets(3764.8);
+                },
+              ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextButtonForUrls(text: "О Продукт", function: () {}),
+              TextButtonForUrls(
+                text: "О Продукт",
+                function: () {
+                  Navigator.pop(context);
+                  context.read<HomeCubit>().scrollWidgets(0.0);
+                },
+              ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextButtonForUrls(text: "Почему мы?", function: () {}),
+              TextButtonForUrls(
+                  text: "Почему мы?",
+                  function: () {
+                    Navigator.pop(context);
+                    context.read<HomeCubit>().scrollWidgets(2960);
+                  }),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              TextButtonForUrls(text: "Контакты", function: () {}),
+              TextButtonForUrls(
+                text: "Контакты",
+                function: () {
+                  Navigator.pop(context);
+                  context.read<HomeCubit>().callButtonOnTap();
+                },
+              ),
             ],
           ),
         ),
@@ -153,17 +198,22 @@ class HomeDrawer extends StatelessWidget {
 class TextButtonForUrls extends StatelessWidget {
   String text;
   Function function;
-
-  TextButtonForUrls({Key? key, required this.text, required this.function})
-      : super(key: key);
+  double? sizeText;
+  TextButtonForUrls({
+    Key? key,
+    double size = 16,
+    required this.text,
+    required this.function,
+  }) : super(key: key) {
+    sizeText = size;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.035),
       child: InkWell(
-        child: classicText(text,
-            color: ColorConst.textColor, size: FontConst.meduimFont),
+        child: classicText(text, color: ColorConst.textColor, size: sizeText!),
         onTap: () {
           function();
         },

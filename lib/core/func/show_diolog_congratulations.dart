@@ -58,6 +58,7 @@ congratulationsDiolog(BuildContext context) => showDialog(
             ],
           ),
         ),
-        insetPadding: const EdgeInsets.symmetric(horizontal: 6),
+        insetPadding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.01),
       ),
     );

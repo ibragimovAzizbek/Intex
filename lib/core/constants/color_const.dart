@@ -3,18 +3,8 @@ import 'package:flutter/material.dart';
 
 class ColorConst {
   static const Color white = Color(0xFFFFFFFF);
-  static const Color primaryColor = Color(0xFF009398);
-  static Color primaryBlueAccent = const Color(0xFF00979C);
-  static const Color recommendColor = Color(0xFF139D4B);
-  static Color primaryAmber = const Color(0xFFFFE600);
-  static Color saleColor = const Color(0xFFFFE500);
-  static Color outOfStockColor = const Color(0xFFED2020);
   static Color blockColor = const Color(0xFFE2EFEF);
   static const Color backgroundColor = Color(0xFFF8F8F8);
-
-  static Color saleLineColor = const Color(0xFFFF0000);
-  static Color customersColor = const Color(0xFFE2EFEF);
-  // static Color salePriceColor = const Color(0xFF848484);
 
   // ? New UI Color
 
@@ -33,4 +23,6 @@ class ColorConst {
   static Color skyDarck = const Color(0xFFB4B6B8);
   static Color textformBorderColor = const Color(0xFFE3E5E5);
   static Color dividerColor = const Color(0xFFF2F2F2);
+  static Color shodowColor = const Color(0xFFF2F6FA);
+  static Color inkBaseColor = const Color(0xFF0E0F0F);
 }
