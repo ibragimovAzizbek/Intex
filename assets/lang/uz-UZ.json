@@ -33,5 +33,7 @@
   "ok" : "Оk",
   "your_order" : "Sizning buyurtmangiz",
   "total_amount" : "Umumiy narx:",
-  "input_address" : "Manzilingizni kiriting"
+  "input_address" : "Manzilingizni kiriting",
+  "name_error" : "Ism kiriting !",
+  "phone_error" : "Telefon raqamni tekshirib qaytadan kiriting."
 }

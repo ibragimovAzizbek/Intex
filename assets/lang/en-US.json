@@ -33,5 +33,7 @@
     "ok" : "Ok",
     "your_order" : "Your order",
     "total_amount" : "Total amount:",
-    "input_address" : "Enter your address"
+    "input_address" : "Enter your address",
+    "name_error" : "Enter name !",
+    "phone_error" : "Check the phone number and re-enter it."
   }

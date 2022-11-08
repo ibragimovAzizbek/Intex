@@ -11,8 +11,8 @@ Stack productAndOrdering(
   BuildContext context,
   String text,
   String imagePath,
-  double originalPrice,
-  double discountPrice,
+  int originalPrice,
+  int discountPrice,
   String sizeSwimmingPool,
   String status,
 ) {
@@ -43,7 +43,13 @@ Stack productAndOrdering(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.16,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: CachedNetworkImage(imageUrl: imagePath),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: CachedNetworkImage(
+                      imageUrl: imagePath,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),

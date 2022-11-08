@@ -4,21 +4,25 @@ import 'package:intex/data/model/products_model.dart';
 import '../../../core/base/base_api.dart';
 
 class ProductService {
+  int page = 0;
+  int limit = 4;
   static final ProductService _inherentce = ProductService._init();
 
   static ProductService get inherentce => _inherentce;
 
   ProductService._init();
 
-  Future<List<ProductsModel>> getProducts() async {
-    Response res = await Dio().get("${BaseApi.baseApi}product/getAll");
+  Future<List<Result>> getProducts() async {
+    Response res = await Dio()
+        .get("${BaseApi.baseApi}products/getAll?page=$page&limit=$limit");
 
-    // print("STATUS CODE: Products");
+    // print("PRODUCTS: ${res.data}");
 
-    if (res.statusCode == 200) {
+    if (res.statusCode == 200 || res.statusCode == 201) {
       try {
-        return (res.data as List)
-            .map((e) => ProductsModel.fromJson(e))
+        // print("PRODUCTS: ${res.data['result']}");
+        return (res.data['result'] as List)
+            .map((e) => Result.fromJson(e))
             .toList();
       } catch (e) {
         throw Exception("ERROR $e");

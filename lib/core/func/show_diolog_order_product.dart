@@ -56,6 +56,7 @@ alertDiologOrderAProduct(BuildContext context, String text) => showDialog(
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
+                      
                       child: Image.asset(
                         'assets/images/karkasniybaseyn.png',
                         fit: BoxFit.cover,

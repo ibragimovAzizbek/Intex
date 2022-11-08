@@ -6,24 +6,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intex/core/constants/color_const.dart';
 import 'package:intex/cubit/home/home_cubit.dart';
 import 'package:intex/routes/routes.dart';
+import 'package:teledart/teledart.dart';
+import 'package:teledart/telegram.dart';
+
+late TeleDart teledart;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  var botToken = '5664303071:AAG8lx4NcQYvhbJZixG-GJ8om1DhL1ObkPE';
+  final username = (await Telegram(botToken).getMe()).username;
+  print("Username: $username");
+  teledart = TeleDart(botToken, Event(username!));
+
+  teledart.start();
+
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeCubit()),
       ],
-      child: EasyLocalization(
-          supportedLocales: const [
-            Locale('ru', 'RU'),
-            Locale('uz', 'UZ'),
-            Locale('en', 'US'),
-          ],
-          path: 'assets/lang',
-          child: DevicePreview(
-              enabled: true, builder: (context) => const MyApp())),
+      child: EasyLocalization(supportedLocales: const [
+        Locale('ru', 'RU'),
+        Locale('uz', 'UZ'),
+        Locale('en', 'US'),
+      ], path: 'assets/lang', child: const MyApp()),
     ),
   );
 }

@@ -5,25 +5,44 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_geocoder/geocoder.dart';
+import 'package:intex/data/services/beckend/products_service.dart';
 import 'package:intex/data/services/location/get_location.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/model/products_model.dart';
+import '../../main.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
+  final formKey = GlobalKey<FormState>();
+
+  String noImagePath =
+      "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGltYWdlJTIwbm98ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
+
   late ScrollController scrollCtx = ScrollController();
+
   TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController =
-      TextEditingController(text: "+998 ");
+
+  TextEditingController phoneNumberController = TextEditingController();
+
   TextEditingController locationController = TextEditingController();
+
   String initialCountry = 'UZ';
+
   PhoneNumber number = PhoneNumber(isoCode: 'UZ');
+
   int howManyProducts = 0;
+
   double totalAmount = 0;
+
+  bool isFirstLoadRunning = false;
+
+  bool hasNextPage = true;
+
+  bool isLoadMoreRunning = false;
 
   var location;
   var address;
@@ -40,6 +59,18 @@ class HomeCubit extends Cubit<HomeState> {
       pixsel,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeIn,
+    );
+  }
+
+  clearNameAndNumberController() {
+    nameController.clear();
+    phoneNumberController.clear();
+  }
+
+  botSendMessage() async {
+    return await teledart.sendMessage(
+      812258141,
+      "Name: ${nameController.text}\nTel: ${phoneNumberController.text}",
     );
   }
 
@@ -124,5 +155,23 @@ class HomeCubit extends Cubit<HomeState> {
     locationController.clear();
     locationController.text = address[0].addressLine;
     emit(HomeInitial());
+  }
+
+  paginationControllTrue() async {
+    isFirstLoadRunning = true;
+    emit(HomeInitial());
+  }
+
+  loadMore() {
+    if (hasNextPage == true &&
+        isFirstLoadRunning == false &&
+        isLoadMoreRunning == false) {
+      isLoadMoreRunning = false;
+      emit(HomeInitial());
+      ProductService.inherentce.page++;
+      List fetchPosts = ProductService.inherentce.getProducts() as List;
+      isLoadMoreRunning = false;
+      emit(HomeInitial());
+    }
   }
 }

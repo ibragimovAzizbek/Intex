@@ -1,7 +1,7 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 class ColorConst {
+  static Color red = Colors.red;
   static const Color white = Color(0xFFFFFFFF);
   static Color blockColor = const Color(0xFFE2EFEF);
   static const Color backgroundColor = Color(0xFFF8F8F8);
